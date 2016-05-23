@@ -1,0 +1,15 @@
+# basic setup for B3
+modules="iproute2 !iwconfig !wpa_supplicant"
+
+# setup for eth0 (wan Ethernet port)
+config_eth0="dhcp"
+dhcpcd_eth0="-t 15"
+
+# setup for eth1 (lan Ethernet port)
+config_eth1="dhcp"
+dhcpcd_eth1="-t 15"
+fallback_eth1="192.168.10.1 netmask 255.255.255.0 brd 192.168.10.255"
+
+# null setup for wlan0 (WiFi adaptor)
+# (this will be owned by hostapd, if present on your system)
+config_wlan0="null"

@@ -1,0 +1,4 @@
+# Does not build on armv5te
+# Seems to require 64 bit CPU
+=dev-perl/IO-AIO-4.330.0
+

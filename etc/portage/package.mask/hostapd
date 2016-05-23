@@ -1,0 +1,4 @@
+# latest versions of hostapd require EC support in openssl
+# which is unavailable with bindist flag set due to patent concerns
+# see http://gentoobrowse.randomdan.homeip.net/package/dev-libs/openssl#uses
+>=net-wireless/hostapd-2.2

@@ -1,0 +1,10 @@
+#!/bin/bash
+# Turn off IPv6 once more
+# Module gets forcibly loaded by some components and we want to
+# get rid of the auto-assigned IPv6 addresses causing mayhem
+# Copyright (c) 2015 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+eval $(ip -6 -o addr | awk '{print "ip -6 addr del "$4" dev "$2";"}')
+

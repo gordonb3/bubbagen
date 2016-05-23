@@ -1,0 +1,24 @@
+#!/bin/bash
+# Turn on purple LED to show we are between poweroff
+# and active state (used for boot AND shutdown)
+# Copyright (c) 2015 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+RED=bubba3\:red\:error
+GREEN=bubba3\:green\:programming
+BLUE=bubba3\:blue\:active
+
+function led-off {
+	echo -n 0 > /sys/class/leds/$1/brightness
+}
+
+function led-on {
+	cat /sys/class/leds/$1/max_brightness > \
+	        /sys/class/leds/$1/brightness
+}
+
+led-on  ${RED}
+led-off ${GREEN}
+led-on  ${BLUE}
+

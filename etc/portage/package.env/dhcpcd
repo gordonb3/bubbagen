@@ -1,0 +1,2 @@
+# see bug 546734
+net-misc/dhcpcd gnusource.conf

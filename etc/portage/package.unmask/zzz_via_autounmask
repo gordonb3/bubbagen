@@ -1,0 +1,4 @@
+# changes written via the autounmask / autounmask-write options to
+# emerge(1) will go into this file, as the "lexicographically last"
+# in the directory
+

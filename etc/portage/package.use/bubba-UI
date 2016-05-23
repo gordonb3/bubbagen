@@ -1,0 +1,15 @@
+# Required by Bubba UI
+
+# USE flags for php:
+# - add dependencies for bubba-backend
+# - add dependencies for bubba-frontend
+# - replace gdbm support by qdbm
+dev-lang/php              cgi fpm sockets json xml gd pdo crypt imap qdbm -gdbm 
+app-eselect/eselect-php   fpm
+
+# Apache modules
+www-servers/apache        apache2_modules_proxy apache2_modules_proxy_fcgi apache2_modules_proxy_http apache2_modules_rewrite
+
+# Nginx modules
+www-servers/nginx         nginx_modules_http_proxy nginx_modules_http_rewrite nginx_modules_http_fastcgi nginx_modules_http_access nginx_modules_http_auth_basic nginx_modules_http_referer
+

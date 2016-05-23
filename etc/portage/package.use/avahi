@@ -1,0 +1,3 @@
+# required by sys-devel/distcc
+net-dns/avahi	dbus
+

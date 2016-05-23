@@ -1,0 +1,5 @@
+# build issue with certain CFLAGS
+# force using the older version from bubba repository
+# it is sufficient for our needs
+>net-libs/nodejs-0.10.5
+

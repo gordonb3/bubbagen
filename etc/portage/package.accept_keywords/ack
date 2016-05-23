@@ -1,0 +1,3 @@
+# required by sys-apps/ack
+>=sys-apps/ack-2.14 ~arm
+>=dev-perl/File-Next-1.120.0-r1 ~arm

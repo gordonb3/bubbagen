@@ -1,0 +1,4 @@
+# dependencies for Horde
+# provides web calendar, webmail client and more
+
+dev-lang/php  sockets gd pdo crypt imap iconv fileinfo ssl intl exif curl sqlite

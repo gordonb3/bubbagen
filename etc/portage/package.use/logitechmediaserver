@@ -1,0 +1,5 @@
+# required for Logitech Media Server
+dev-lang/perl               ithreads
+dev-perl/Image-Scale        gif jpeg png
+dev-perl/Template-Toolkit   gd
+

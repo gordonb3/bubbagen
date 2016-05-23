@@ -1,0 +1,30 @@
+#!/bin/bash
+# Change LED color to show we are completely started.
+#   - Turn BLUE when running from harddisk
+#   - Turn GREEN when running from USB
+# Copyright (c) 2016 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+RED=bubba3\:red\:error
+GREEN=bubba3\:green\:programming
+BLUE=bubba3\:blue\:active
+
+function led-off {
+	echo -n 0 > /sys/class/leds/$1/brightness
+}
+
+function led-on {
+	cat /sys/class/leds/$1/max_brightness > \
+	        /sys/class/leds/$1/brightness
+}
+
+if $(grep -q "root=/dev/sda" /proc/cmdline); then
+	led-off ${RED}
+	led-off ${GREEN}
+	led-on  ${BLUE}
+else
+	led-off ${RED}
+	led-on  ${GREEN}
+	led-off ${BLUE}
+fi
