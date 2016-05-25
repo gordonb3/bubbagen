@@ -154,9 +154,26 @@ for nic in "eth0" "eth1"; do
 	fi
 done
 rm /etc/runlevels/default/net.* 2>/dev/null
-rc-update add net.eth0
-rc-update add net.eth1
+rc-update add net.eth0 default
+rc-update add net.eth1 default
 cd - >/dev/null
+
+# Services config
+echo "Enable basic services"
+cd /etc/runlevels/default
+rm apache2 bootled bubba-adminphp bubba-buttond bubba-firewall dnsmasq haveged ntpd samba sshd iptables shorewall 2>/dev/null
+rc-update add apache2 default
+rc-update add bubba-adminphp default
+rc-update add bubba-buttond default
+rc-update add bubba-firewall default
+rc-update add dnsmasq default
+rc-update add haveged default
+rc-update add ntpd default
+rc-update add samba default
+rc-update add sshd default
+cd - >/dev/null
+
+
 
 echo ""
 echo 'All done! Please reboot to activate the new settings.'
