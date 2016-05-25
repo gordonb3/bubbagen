@@ -136,6 +136,7 @@ chown admin /home/admin/.bubbacfg
 
 
 # Set networking
+echo "Setting network defaults"
 cd /etc/init.d
 if $(ip link show wlan0 2>/dev/null | grep -q "state"); then
 	for nic in "wlan0" "br0"; do
@@ -144,7 +145,7 @@ if $(ip link show wlan0 2>/dev/null | grep -q "state"); then
 		fi
 	done
 	if $(ip link show wlan0 2>/dev/null | grep -q "state UP"); then
-		echo "WARNING: System will reboot without WiFi"
+		echo "WARNING: you currently have WiFi enabled, the new system will start without it"
 	fi
 fi
 for nic in "eth0" "eth1"; do
