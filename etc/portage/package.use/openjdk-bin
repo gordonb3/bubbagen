@@ -1,0 +1,4 @@
+# Headless system
+>=dev-java/openjdk-bin-6.0.0.0      -X -webstart
+>=dev-java/openjdk-bin-7.0.0.0      -gtk  -awt -jbootstrap headless-awt 
+

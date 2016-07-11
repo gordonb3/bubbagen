@@ -1,0 +1,5 @@
+# Having ipv6 enabled causes dhcpcd to segfault on the fallback profile for eth1
+# We require the fallback profile in case the box is used in a network that does
+# not have any other dhcp server.
+net-misc/dhcpcd   -ipv6
+

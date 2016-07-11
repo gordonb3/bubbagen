@@ -1,0 +1,3 @@
+# disable ipv6
+=dev-lang/ruby-2.1.7 -ipv6
+

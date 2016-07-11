@@ -1,0 +1,3 @@
+# Require threads USE flag on mini-xml
+>=dev-libs/mini-xml-2.9  threads
+

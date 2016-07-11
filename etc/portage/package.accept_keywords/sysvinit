@@ -1,0 +1,4 @@
+# Adds flash writing routine required for shutdown of the B3
+# to the regular halt, shutdown and powerdown commands
+=sys-apps/sysvinit-2.88-r100::bubba **
+

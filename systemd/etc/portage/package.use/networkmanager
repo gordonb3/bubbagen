@@ -1,0 +1,10 @@
+# required when building networkmanager with wifi support
+>=net-wireless/wpa_supplicant-2.5-r1 dbus
+
+# glib-networking pulls in gnome desktop elements
+net-libs/glib-networking  -gnome
+
+# networkmanager favours dhclient, but we want dhcpcd for running our hook scripts
+# disable wifi extensions - we are using hostapd
+net-misc/networkmanager   dhcpcd -dhclient -introspection -wext -wifi
+

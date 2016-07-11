@@ -1,0 +1,11 @@
+# Stay at java 7 for now
+virtual/jdk:1.8
+virtual/jre:1.8
+dev-java/openjdk-bin:8
+
+# There is no suitable version of icedtea-bin for armv5
+dev-java/icedtea-bin
+
+# Icedtea build currently fails for all versions
+dev-java/icedtea
+

@@ -1,0 +1,3 @@
+# Remove OpenRC from the system profile - we are using systemd
+-*sys-apps/openrc
+

@@ -1,0 +1,10 @@
+app-eselect/eselect-java ~arm
+dev-java/antlr ~arm
+dev-java/java-config ~arm
+dev-java/stringtemplate ~arm
+dev-libs/antlr-c **
+dev-libs/mini-xml ~arm
+media-sound/forked-daapd **
+sys-apps/baselayout-java ~arm
+virtual/jre ~arm
+

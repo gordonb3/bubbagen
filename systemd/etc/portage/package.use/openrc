@@ -1,0 +1,3 @@
+# No need to keep net.* rc targets around with systemd
+sys-apps/openrc   -netifrc
+
