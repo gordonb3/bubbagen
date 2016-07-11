@@ -34,7 +34,7 @@ echo "Unpack source"
 cd /tmp
 tar -xzf /var/lib/bubba/bubba-default-config.tgz
 
-if $(echo $* | grep -q onlyexist); then
+if $(echo $* | grep -q minimal); then
 	ls -1 etc | while read fentry; do
 		if [ ! -e /etc/${fentry} ] && [ -e etc/${fentry} ]; then
 			pkg=$(echo ${fentry} | awk -F. '{print $1}')
