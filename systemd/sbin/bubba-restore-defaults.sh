@@ -145,15 +145,15 @@ if $(ip link show wlan0 2>/dev/null | grep -q "state"); then
 fi
 if $(systemctl is-active NetworkManager &>/dev/null); then
 	conn=$(nmcli d | grep "^eth0\s" | awk '{print $NF}')
-	if [ "conn" != "WAN" ]; then
-		if [ "conn" != "--" ]; then
+	if [ "${conn}" != "WAN" ]; then
+		if [ "${conn}" != "--" ]; then
 			nmcli connection delete ${conn}
 		fi
 		nmcli connection add type ethernet con-name WAN ifname eth0
 	fi
 	conn=$(nmcli d | grep "^eth1\s" | awk '{print $NF}')
-	if [ "conn" != "LAN" ]; then
-		if [ "conn" != "--" ]; then
+	if [ "${conn}" != "LAN" ]; then
+		if [ "${conn}" != "--" ]; then
 			nmcli connection delete ${conn}
 		fi
 		nmcli connection add type ethernet con-name LAN ifname eth1
