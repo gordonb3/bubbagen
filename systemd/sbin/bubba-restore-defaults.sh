@@ -143,7 +143,7 @@ if $(ip link show wlan0 2>/dev/null | grep -q "state"); then
 	fi
 	systemctl is-enabled hostapd &>/dev/null && systemctl disable hostapd
 fi
-if $(systemctl is-active NetworkManager); then
+if $(systemctl is-active NetworkManager &>/dev/null); then
 	conn=$(nmcli d | grep "^eth0\s")
 	if [ conn != "WAN" ]; then
 		if [ conn != "--" ]; then
