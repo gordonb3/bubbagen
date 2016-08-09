@@ -9,7 +9,7 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.3.0** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended. The `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b3/blob/master/configs/b3_live_usb_config) in the git archive.
+The kernel used in the image is **4.3.0** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended. The original `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b3/blob/master/configs/b3_live_usb_config) in the git archive.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
@@ -28,20 +28,20 @@ To try this out, you will need:
 * A PC to decompress the image and write it to the USB key (of course, you can also use your B3 for this, assuming it is currently running the standard Excito / Debian Squeeze system). This is most easily done on a Linux machine of some sort, but tools are also available for Windows (see [here](http://tukaani.org/xz/) and [here](http://sourceforge.net/projects/win32diskimager/), for example). In the instructions below I'm going to assume you're using Linux.
 
 
-## Downloading and Writing the Image
+## Downloading and Writing the Image 
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.8.2/bubbagenb3img-1.8.2.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.8.5/bubbagenb3img-1.8.5.xz
 ```
-to fetch the compressed disk image file (`488` MiB)
+to fetch the compressed disk image file (`491` MiB)
 
 Next, insert (into your Linux box) the USB key on which you want to install the image, and determine its device path (this will be something like `/dev/sdb`, `/dev/sdc` etc.; the actual path will depend on your system, you can use the `lsblk` tool to help you). Unmount any existing partitions of the USB key that may have automounted (using `umount`). Then issue:
 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.8.5.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
