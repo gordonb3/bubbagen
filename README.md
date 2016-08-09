@@ -13,9 +13,10 @@ The kernel used in the image is **4.3.0** from gentoo-sources, with the necessar
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
-Variant | Version | Image
+Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | 1.8.2 | [bubbagenb3img.xz](https://github.com/gordonb3/bubbagen/releases/download/1.8.2/bubbagenb3img-1.8.2.xz)
+B3 with or without Internal Drive | openRC | 1.8.2 | [bubbagenb3img-1.8.2.xz](https://github.com/gordonb3/bubbagen/releases/download/1.8.2/bubbagenb3img-1.8.2.xz)
+B3 with or without Internal Drive | systemd | 1.8.5 | [bubbagenb3img-1.8.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.8.5/bubbagenb3img-1.8.5.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -93,9 +94,11 @@ For the main text on this, please refer to the [original README](https://github.
 
 The following changes to the original 1.8.0 release from Sakaki apply:
 
-1. This image has been brought up to date against the Gentoo tree as of 24 May 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.8.2).
+1. The 1.8.2 image has been brought up to date against the Gentoo tree as of 24 May 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.8.2).
 
-1. This image has sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
+1. The 1.8.5 image has been brought up to date against the Gentoo tree as of 8 August 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.8.5).
+
+1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
@@ -108,8 +111,8 @@ Have fun! ^-^
   * [`bubba`](https://github.com/gordonb3/bubba-overlay): this overlay provides the `Bubba OS` and `Logitech Media Server`. It also provides ebuilds for the  Domoticz and JDK binary builds; these have not been installed in the image, but you can easily `emerge` them if you like.
 * Please note that the firewall, as initially configured, will allow `ssh` traffic on the `wan` port also.
 * Apart from Apache web server to run the Bubba User Interface, Samba file sharing is also enabled by default
-* Tor is not installed on this image because of licensing issues with openssl. You may install it yourself but you should note that this will trigger a rebuild of several other packages (including openssl and openssh - careful!)
-* There is no MySQL in this image. Reason? It consumes too much memory (YMMV). Original Excito Bubba OS Services that used it have either been adapted to use SQLite instead, or been replaced by alternatives. Webmail is now served by Roundcube and bubba-album was dropped in favor of Singapore Gallery (sgal).
+* Tor is not installed on the bubbagen image because of licensing issues with openssl. You may install it yourself but you should note that this will trigger a rebuild of several other packages (including openssl and openssh - careful!)
+* There is no MySQL in the bubbagen image. Reason? It consumes too much memory (YMMV). Original Excito Bubba OS Services that used it have either been adapted to use SQLite instead, or been replaced by alternatives. Webmail is now served by Roundcube and bubba-album was dropped in favor of Singapore Gallery (sgal).
 * If you have a WiFi-enabled B3, the corresponding network interface is named `wlan0` (there is a `udev` rule that does this, namely `/lib/udev/rules.d/70-net-name-use-custom.rules`). Please note that this rule will **not** work correctly if you have more than one WiFi adaptor on your B3 (an unusual case).
 * The image includes a 1GiB swap partition, and also has sufficient space in its root partition to e.g., perform a kernel compilation, should you so desire.
 * If you have a USB key larger than the minimum 8GB, after writing the image you can easily extend the size of the second partition (using `fdisk` and `resize2fs`), so you have more space to work in. See [these instructions](http://geekpeek.net/resize-filesystem-fdisk-resize2fs/), for example.
