@@ -4,8 +4,8 @@ LAN port.
 
 Patch by Gordon Bos
 
---- src/dhcp-manager/nm-dhcp-client.c
-+++ src/dhcp-manager/nm-dhcp-client.c
+--- a/src/dhcp-manager/nm-dhcp-client.c
++++ b/src/dhcp-manager/nm-dhcp-client.c
 @@ -202,6 +202,7 @@
  {
  	if (g_ascii_strcasecmp (reason, "bound") == 0 ||
