@@ -1,0 +1,2 @@
+#package requires -bindist to be set on openssl
+=net-mail/dovecot-2.2.25
