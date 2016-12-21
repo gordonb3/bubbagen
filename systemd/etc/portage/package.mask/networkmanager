@@ -1,0 +1,5 @@
+# Networkmanager >1.0.x does no longer support dhcpcd USE flag
+# We require dhcpcd because this is the only dhcp client in which
+# we can configure a fallback profile to keep our installation
+# portable.
+>=net-misc/networkmanager-1.1

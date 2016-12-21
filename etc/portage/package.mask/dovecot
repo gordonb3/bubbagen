@@ -1,2 +1,3 @@
-#package requires -bindist to be set on openssl
+# This version of dovecot requires ECDSA support in openssl
+# which is unavailable with bindist flag set due to patent concerns
 =net-mail/dovecot-2.2.25
