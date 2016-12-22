@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.3.0)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.4.26)
 
 ## Description
 
@@ -9,14 +9,14 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.3.0** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended. The original `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b3/blob/master/configs/b3_live_usb_config) in the git archive.
+The kernel used in the image is **4.4.26** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended. The original `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b3/blob/master/configs/b3_live_usb_config) in the git archive.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.8.2 | [bubbagenb3img-1.8.2.xz](https://github.com/gordonb3/bubbagen/releases/download/1.8.2/bubbagenb3img-1.8.2.xz)
-B3 with or without Internal Drive | systemd | 1.8.5 | [bubbagenb3img-1.8.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.8.5/bubbagenb3img-1.8.5.xz)
+B3 with or without Internal Drive | openRC | 1.9.0 | [bubbagenb3img-1.9.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.0.xz)
+B3 with or without Internal Drive | systemd | 1.9.5 | [bubbagenb3img-1.9.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.5.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.8.5/bubbagenb3img-1.8.5.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.0.xz
 ```
 to fetch the compressed disk image file (`491` MiB)
 
@@ -41,7 +41,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.8.5.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.9.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -89,14 +89,14 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [original README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following changes to the original 1.8.0 release from Sakaki apply:
 
-1. The 1.8.2 image has been brought up to date against the Gentoo tree as of 24 May 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.8.2).
+1. The 1.9.0 image has been brought up to date against the Gentoo tree as of 22 Dec 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.0).
 
-1. The 1.8.5 image has been brought up to date against the Gentoo tree as of 8 August 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.8.5).
+1. The 1.9.5 image has been brought up to date against the Gentoo tree as of 22 Dec 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
@@ -113,7 +113,7 @@ Have fun! ^-^
 * Apart from Apache web server to run the Bubba User Interface, Samba file sharing is also enabled by default
 * Tor is not installed on the bubbagen image because of licensing issues with openssl. You may install it yourself but you should note that this will trigger a rebuild of several other packages (including openssl and openssh - careful!)
 * There is no MySQL in the bubbagen image. Reason? It consumes too much memory (YMMV). Original Excito Bubba OS Services that used it have either been adapted to use SQLite instead, or been replaced by alternatives. Webmail is now served by Roundcube and bubba-album was dropped in favor of Singapore Gallery (sgal).
-* If you have a WiFi-enabled B3, the corresponding network interface is named `wlan0` (there is a `udev` rule that does this, namely `/lib/udev/rules.d/70-net-name-use-custom.rules`). Please note that this rule will **not** work correctly if you have more than one WiFi adaptor on your B3 (an unusual case).
+* If you have a WiFi-enabled B3, the corresponding network interface is named `wlan0` (there is a `udev` rule that does this, namely `/lib/udev/rules.d/70-net-name-use-custom.rules`). Please note that this rule will **not** work correctly if you have more than one WiFi adaptor on your B3 (an unusual setup).
 * The image includes a 1GiB swap partition, and also has sufficient space in its root partition to e.g., perform a kernel compilation, should you so desire.
 * If you have a USB key larger than the minimum 8GB, after writing the image you can easily extend the size of the second partition (using `fdisk` and `resize2fs`), so you have more space to work in. See [these instructions](http://geekpeek.net/resize-filesystem-fdisk-resize2fs/), for example.
 * Postfix has been reconfigured to disallow starttls on the regular port 25. Use submission or ssmtp ports instead if you want to use relay from other than the lan interface.
@@ -167,7 +167,7 @@ Once logged in, feel free to configure your system as you like! Of course, if yo
 
 ### Keeping Your Gentoo System Up-To-Date
 
-Please refer to the corresponding section(s) in the [original README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 ## Feedback Welcome!
