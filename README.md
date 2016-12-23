@@ -9,7 +9,7 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.4.26** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended. The original `.config` used for the kernel may be found [here](https://github.com/sakaki-/gentoo-on-b3/blob/master/configs/b3_live_usb_config) in the git archive.
+The kernel used in the image is **4.4.26** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
@@ -94,9 +94,9 @@ For the main text on this, please refer to the [older README](https://github.com
 
 The following changes to the original 1.8.0 release from Sakaki apply:
 
-1. The 1.9.0 image has been brought up to date against the Gentoo tree as of 22 Dec 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.0).
+1. Both 1.9.x images use kernel version 4.4.26, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
 
-1. The 1.9.5 image has been brought up to date against the Gentoo tree as of 22 Dec 2016. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.5).
+1. Both 1.9.x images have been brought up to date against the Gentoo tree as of 22 Dec 2016. The full set of packages in the image may be viewed [here (1.9.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.0) and [here (1.9.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
@@ -108,7 +108,7 @@ Have fun! ^-^
 * The image is subscribed to the following overlays:
   * [`sakaki-tools`](https://github.com/sakaki-/sakaki-tools): this overlay (provided by Sakaki) provides the tools `showem` ([source](https://github.com/sakaki-/showem), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/showem.pdf)) and `genup` ([source](https://github.com/sakaki-/genup), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/genup.pdf)). (Note - these replace the old `showem-lite` and `genup-lite` tools.)
   * [`gentoo-b3`](https://github.com/sakaki-/gentoo-b3-overlay): this overlay (provided by Sakaki) provides a modern version of the `lzo` package ([upstream](http://www.oberhumer.com/opensource/lzo/download/); required because of an [alignment bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=757037#32)), and the `buildkernel-b3` tool ([source](https://github.com/sakaki-/buildkernel-b3), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/buildkernel-b3.pdf)).
-  * [`bubba`](https://github.com/gordonb3/bubba-overlay): this overlay provides the `Bubba OS` and `Logitech Media Server`. It also provides ebuilds for the  Domoticz and JDK binary builds; these have not been installed in the image, but you can easily `emerge` them if you like.
+  * [`bubba`](https://github.com/gordonb3/bubba-overlay): this overlay provides the `Bubba OS` and `Logitech Media Server`. It also provides ebuilds for the home automation software Domoticz and supporting software; these have not been installed in the image, but you can easily `emerge` them if you like.
 * Please note that the firewall, as initially configured, will allow `ssh` traffic on the `wan` port also.
 * Apart from Apache web server to run the Bubba User Interface, Samba file sharing is also enabled by default
 * Tor is not installed on the bubbagen image because of licensing issues with openssl. You may install it yourself but you should note that this will trigger a rebuild of several other packages (including openssl and openssh - careful!)
