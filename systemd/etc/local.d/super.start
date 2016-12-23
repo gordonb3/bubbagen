@@ -1,0 +1,23 @@
+#!/bin/sh
+# Verify startup of Apache and Samba
+#
+# Due to a race condition in networking these services may 
+# fail on the Live USB. If the associated listening port is
+# not detected we restart the services here.
+#
+# Copyright (c) 2016 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+LISTEN=$(netstat -an | awk '{print $4}' | grep ":80\s")
+if [ "${LISTEN}" = "" ];then
+	systemctl restart apache2
+fi
+
+if [ -e /etc/systemd/system/multi-user.target.wants/smbd.service ]; then
+	LISTEN=$(netstat -an | awk '{print $4}' | grep ":445\s")
+	if [ "${LISTEN}" = "" ];then
+		systemctl restart smbd
+	fi
+fi
+
