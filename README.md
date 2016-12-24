@@ -13,28 +13,28 @@ The kernel used in the image is **4.4.26** from gentoo-sources, with the necessa
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
-Variant | Init type | Version | Image
-:--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.9.0 | [bubbagenb3img-1.9.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.0.xz)
-B3 with or without Internal Drive | systemd | 1.9.5 | [bubbagenb3img-1.9.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.5.xz)
+Variant | Init type | Version | Image | Size
+:--- | ---: | ---: | ---: | ---:
+B3 with or without Internal Drive | openRC | 1.9.0 | [bubbagenb3img-1.9.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.0.xz) | 538 MiB
+B3 with or without Internal Drive | systemd | 1.9.5 | [bubbagenb3img-1.9.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.5.xz) | 552 MiB
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
 ## Prerequisites
 
 To try this out, you will need:
-* A USB key of at least 8GB capacity (the *compressed* (.xz) image is `488` MiB, the *uncompressed* image is 14,813,184 (512 byte) sectors = 7,584,350,208 bytes). Unfortunately, not all USB keys work with the various versions of [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) that were factory installed on the B3. Most SanDisk and Lexar USB keys appear to work reliably, but others (e.g., Verbatim keys) will not boot properly. (You may find the list of known-good USB keys [in this post](http://forum.doozan.com/read.php?2,1915,page=1) useful.)
+* A USB key of at least 8GB capacity (the *uncompressed* image is 14,813,184 (512 byte) sectors = 7,584,350,208 bytes). Unfortunately, not all USB keys work with the various versions of [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) that were factory installed on the B3. Most SanDisk and Lexar USB keys appear to work reliably, but others (e.g., Verbatim keys) will not boot properly. (You may find the list of known-good USB keys [in this post](http://forum.doozan.com/read.php?2,1915,page=1) useful.)
 * An Excito B3 (obviously!).
 * A PC to decompress the image and write it to the USB key (of course, you can also use your B3 for this, assuming it is currently running the standard Excito / Debian Squeeze system). This is most easily done on a Linux machine of some sort, but tools are also available for Windows (see [here](http://tukaani.org/xz/) and [here](http://sourceforge.net/projects/win32diskimager/), for example). In the instructions below I'm going to assume you're using Linux.
 
 
-## Downloading and Writing the Image 
+## Downloading and Writing the Image
 
 On your Linux box, issue:
 ```
 # wget -c https://github.com/gordonb3/bubbagen/releases/download/1.9/bubbagenb3img-1.9.0.xz
 ```
-to fetch the compressed disk image file (`491` MiB)
+to fetch the compressed disk image file
 
 Next, insert (into your Linux box) the USB key on which you want to install the image, and determine its device path (this will be something like `/dev/sdb`, `/dev/sdc` etc.; the actual path will depend on your system, you can use the `lsblk` tool to help you). Unmount any existing partitions of the USB key that may have automounted (using `umount`). Then issue:
 
@@ -47,6 +47,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
 
 The above `xzcat` to the USB key will take some time, due to the decompression (it takes between 8 and 20 minutes on my machine, depending on the USB key used). It should exit cleanly when done - if you get a message saying 'No space left on device', then your USB key is too small for the image, and you should try again with a larger capacity one.
+
 
 ## Booting!
 
