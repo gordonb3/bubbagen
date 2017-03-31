@@ -34,7 +34,8 @@
 #                     when you enable SSL)
 #
 #APACHE2_OPTS="-D DEFAULT_VHOST -D INFO -D SSL -D SSL_DEFAULT_VHOST -D LANGUAGE"
-APACHE2_OPTS="-D INFO -D SSL -D LANGUAGE -D PROXY -D PHP5 -D PROXY_HTML"
+#APACHE2_OPTS="-D INFO -D SSL -D LANGUAGE -D PROXY -D PHP5 -D PROXY_HTML"
+APACHE2_OPTS="-D INFO -D SSL -D LANGUAGE -D PROXY -D PHP -D PROXY_HTML"
 
 # Extended options for advanced uses of Apache ONLY
 # You don't need to edit these unless you are doing crazy Apache stuff
