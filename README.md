@@ -16,7 +16,7 @@ The image may be downloaded from the link below and should work, without modific
 Variant | Init type | Version | Image | Size
 :--- | ---: | ---: | ---: | ---:
 B3 with or without Internal Drive | openRC | 1.9.1 | [bubbagenb3img-1.9.1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.1.xz) | 503 MiB
-B3 with or without Internal Drive | systemd | 1.9.6 | [bubbagenb3img-1.9.6.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.6.xz) | 531 MiB
+B3 with or without Internal Drive | systemd | 1.9.6 | [bubbagenb3img-1.9.6.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.6.xz) | 530 MiB
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
