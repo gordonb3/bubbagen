@@ -13,3 +13,8 @@ www-servers/apache        apache2_modules_proxy apache2_modules_proxy_fcgi apach
 # Nginx modules
 www-servers/nginx         nginx_modules_http_proxy nginx_modules_http_rewrite nginx_modules_http_fastcgi nginx_modules_http_access nginx_modules_http_auth_basic nginx_modules_http_referer
 
+# ruby modules with ~arm keyword should not pull in ruby 2.2
+dev-ruby/coffee-script		-ruby_targets_ruby22
+dev-ruby/coffee-script-source	-ruby_targets_ruby22
+dev-ruby/execjs			-ruby_targets_ruby22
+
