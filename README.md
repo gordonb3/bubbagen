@@ -15,8 +15,8 @@ The image may be downloaded from the link below and should work, without modific
 
 Variant | Init type | Version | Image | Size
 :--- | ---: | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.9.1 | [bubbagenb3img-1.9.1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.1.xz) | 503 MiB
-B3 with or without Internal Drive | systemd | 1.9.6 | [bubbagenb3img-1.9.6.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.6.xz) | 530 MiB
+B3 with or without Internal Drive | openRC | 1.9.1-r1 | [bubbagenb3img-1.9.1-r1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.1-r1.xz) | 515 MiB
+B3 with or without Internal Drive | systemd | 1.9.6-r1 | [bubbagenb3img-1.9.6-r1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.6-r1.xz) | 536 MiB
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.9_p1/bubbagenb3img-1.9.1.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.1-r1.xz
 ```
 to fetch the compressed disk image file
 
@@ -97,12 +97,18 @@ The following changes to the original 1.8.0 release from Sakaki apply:
 
 1. Both 1.9.x images use kernel version 4.4.39, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
 
-1. Both 1.9.x images have been brought up to date against the Gentoo tree as of 05 Apr 2017. The full set of packages in the image may be viewed [here (1.9.1)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.1) and [here (1.9.6)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.6).
+1. Both 1.9.x images have been brought up to date against the Gentoo tree as of 05 Apr 2017. The full set of packages in the image may be viewed [here (1.9.1-r1)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.1-r1) and [here (1.9.6-r1)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.6-r1).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
+
+## Changes since version 1.9.1 (1.9.6)
+
+* perl has been upgraded to version 5.24
+* gcc has been upgraded to version 5.4.0 and relevant packages rebuilt for using the new C++ ABI
+* all packages brought up to date against the portage tree at Apr 25, 2017
 
 ## Miscellaneous Points
 
