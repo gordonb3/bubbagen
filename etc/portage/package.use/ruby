@@ -1,5 +1,2 @@
 # disable ipv6
-=dev-lang/ruby-2.1.7 -ipv6
-
-# stay at ruby 2.1 
-dev-ruby/*      ruby_targets_ruby21 -ruby_targets_ruby22 -ruby_targets_ruby23 -ruby_targets_ruby24
+dev-lang/ruby -ipv6
