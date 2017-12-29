@@ -1,0 +1,11 @@
+# latest versions of dev-python/cryptography require EC support in openssl
+# which is unavailable with bindist flag set due to patent concerns
+>=dev-python/cryptography-1.9
+
+# the following packages have a dependency on dev-python/cryptography >= 1.9
+>=dev-python/pyopenssl-17.2.0
+>=dev-python/urllib3-1.22
+>=dev-python/requests-2.18.2-r1
+>=dev-python/ssl-fetch-0.4
+>=app-portage/mirrorselect-2.2.3
+
