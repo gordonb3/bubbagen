@@ -1,0 +1,3 @@
+# having `-march=armv5te` in CFLAGS causes gs binary
+# to go into an endless loop while reading TTF fonts
+app-text/ghostscript-gpl	nomarch-cflags.conf
