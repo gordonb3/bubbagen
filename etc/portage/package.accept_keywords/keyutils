@@ -1,0 +1,3 @@
+# required to be able to upgrade man-pages
+=sys-apps/keyutils-1.5.9-r4	~arm
+
