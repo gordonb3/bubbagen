@@ -9,7 +9,7 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.9.34** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **4.9.49-r1** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
@@ -95,7 +95,7 @@ For the main text on this, please refer to the [older README](https://github.com
 
 The following changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.10.x images use kernel version 4.9.34, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
+1. Both 1.10.x images use kernel version 4.9.49-r1, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
 
 1. Both 1.10.x images have been brought up to date against the Gentoo tree as of 29 Dec 2017. The full set of packages in the image may be viewed [here (1.10.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.0) and [here (1.10.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.5).
 
