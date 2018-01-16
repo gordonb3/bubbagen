@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.4.39 LTS - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.9.34 LTS - Gentoo stable)
 
 ## Description
 
@@ -9,14 +9,14 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.4.39** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **4.9.34** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image | Size
 :--- | ---: | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.9.1-r1 | [bubbagenb3img-1.9.1-r1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.1-r1.xz) | 515 MiB
-B3 with or without Internal Drive | systemd | 1.9.6-r1 | [bubbagenb3img-1.9.6-r1.xz](https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.6-r1.xz) | 536 MiB
+B3 with or without Internal Drive | openRC | 1.10.0 | [bubbagenb3img-1.10.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.0.xz) | 508 MiB
+B3 with or without Internal Drive | systemd | 1.10.5 | [bubbagenb3img-1.10.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.5.xz) | 528 MiB
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.9_p1-r1/bubbagenb3img-1.9.1-r1.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -41,7 +41,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.9.1.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.10.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -95,20 +95,24 @@ For the main text on this, please refer to the [older README](https://github.com
 
 The following changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.9.x images use kernel version 4.4.39, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
+1. Both 1.10.x images use kernel version 4.9.34, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
 
-1. Both 1.9.x images have been brought up to date against the Gentoo tree as of 05 Apr 2017. The full set of packages in the image may be viewed [here (1.9.1-r1)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.1-r1) and [here (1.9.6-r1)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.9.6-r1).
+1. Both 1.10.x images have been brought up to date against the Gentoo tree as of 29 Dec 2017. The full set of packages in the image may be viewed [here (1.10.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.0) and [here (1.10.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
 
-## Changes since version 1.9.1 (1.9.6)
+## Changes since version 1.9.1-r1 (systemd: 1.9.6-r1)
 
-* perl has been upgraded to version 5.24
-* gcc has been upgraded to version 5.4.0 and relevant packages rebuilt for using the new C++ ABI
-* all packages brought up to date against the portage tree at Apr 25, 2017
+* dropped mediatomb from package list (this package has in fact been unmanaged by the interface since Excito software version 2.4)
+* java VM updated to openjdk 8
+* fixed a cyclic dependency on bridge interface in hostapd
+* fixed unability to print non-native documents (due to deadlock in Ghostscript)
+* block enabling the WiFi AP when LAN is set to receive its IP through DHCP (causes network to fail)
+* fixed a problem with restarting network interfaces in systemd version
+* all packages brought up to date against the portage tree at Jan 10, 2018
 
 ## Miscellaneous Points
 
