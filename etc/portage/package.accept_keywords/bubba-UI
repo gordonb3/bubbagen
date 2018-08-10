@@ -1,7 +1,5 @@
 # Requirements for Bubba UI backend and frontend
 
-net-libs/nodejs ~arm
-
 dev-perl/Config-Simple **
 dev-perl/Config-Tiny **
 dev-perl/Crypt-PasswdMD5 ~arm

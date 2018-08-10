@@ -1,0 +1,2 @@
+# segfaults during compile on ARM
+=net-libs/nodejs-6.11.5		-arm

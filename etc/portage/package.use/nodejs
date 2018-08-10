@@ -1,0 +1,6 @@
+# v8 snapshot does not build correctly in our crossdev environment
+# since this package is pulled in as a build time requirement only
+# for bubba-frontend and we don't actually need this feature there
+# we'll simply disble it.
+net-libs/nodejs		-snapshot
+

@@ -1,0 +1,3 @@
+# xtables-addons-3.0 requires kernel version >= 4.15, if you have older kernel please use 2.x version instead
+>=net-firewall/xtables-addons-3.0
+
