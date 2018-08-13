@@ -59,13 +59,14 @@ Begin with your B3 powered off and the power cable removed. Insert the USB key i
 1. turn **green** again when the system is fully functional.
 
 > The `purple` state will use 15 seconds less if you attach the WAN port to a valid existing network
+
 > The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive (stock Sakaki gentoo-on-b3 will also show green LED when runing from harddrive)
 
 After the LED turns green in step 3, above, you should be able to log in, via `ssh`, per the following instructions.
 
 ## Connecting to the B3
 
-First, connect your client PC (or Mac etc.) to the **lan** Ethernet port of your B3 (you can use a regular Ethernet cable for this, the B3's ports are autosensing). WiFi is disabled. Once booted, you can use your browser to connect to the B3 through [http://b3](http://b3), where you should see the familiar Excito B3 admin. The default username and password for the administrator account is:
+First, connect your client PC (or Mac etc.) to the **lan** Ethernet port of your B3 (you can use a regular Ethernet cable for this, the B3's ports are autosensing). WiFi is disabled. Once booted, you can use your browser to connect to the B3 through [http://b3](http://b3), where you should see the familiar Excito B3 admin. The default username and password for the administrator account is:    
 **&nbsp; &nbsp; Username: admin**    
 **&nbsp; &nbsp; Password: admin**    
 
@@ -97,13 +98,11 @@ For the main text on this, please refer to the [older README](https://github.com
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.11.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply 
-editing a `boot.ini` file.
+1. Both 1.11.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
 
 2. The image supplied kernel is version 4.14.52 and supports both openrc and systemd init systems. 
 
-1. Both 1.11.x images have been brought up to date against the Gentoo tree as of 10 Aug 2018. The full set of packages in the image may be viewed [here 
-(1.11.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.0) and [here (1.11.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.5).
+1. Both 1.11.x images have been brought up to date against the Gentoo tree as of 10 Aug 2018. The full set of packages in the image may be viewed [here (1.11.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.0) and [here (1.11.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
@@ -154,8 +153,8 @@ If you like Bubbagen, and want to set it up permanently on the B3's internal har
 * /dev/sda4 as a home partition using the rest of the drive, and format it `ext4`.
 
 > If you like the root partition to be bigger you can specify this in `/root/install.ini`
-> The script [`/root/install_on_sda.sh`](file:///) will automatically decide between creating a new DOS or GPT partition table; if you want to force selection (disks 
-<=2TiB only; larger disks will always be GPT), then use fdisk to create the right type partition table prior to running the install script. 
+
+> The script [`/root/install_on_sda.sh`](file:///) will automatically decide between creating a new DOS or GPT partition table; if you want to force selection (disks <=2TiB only; larger disks will always be GPT), then use fdisk to create the right type partition table prior to running the install script. 
 
 OK, first, boot into the image and then connect to your B3 via `ssh`, as described above. Then simply run the supplied script to install onto your hard drive:
 ```
