@@ -13,7 +13,7 @@ The kernel used in the image is **4.14.52** from gentoo-sources, with the necess
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
-Variant | Init type | Version | Image | Size
+Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
 B3 with or without Internal Drive | openRC | 1.11.0 | [bubbagenb3img-1.11.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.11/bubbagenb3img-1.11.0.xz)
 B3 with or without Internal Drive | systemd | 1.11.5 | [bubbagenb3img-1.11.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.11/bubbagenb3img-1.11.5.xz)
