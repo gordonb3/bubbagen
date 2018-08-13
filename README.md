@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.9.34 LTS - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.14.52 LTS - Gentoo stable)
 
 ## Description
 
@@ -9,14 +9,14 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.9.49-r1** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **4.14.52** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image | Size
-:--- | ---: | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.10.0 | [bubbagenb3img-1.10.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.0.xz) | 508 MiB
-B3 with or without Internal Drive | systemd | 1.10.5 | [bubbagenb3img-1.10.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.5.xz) | 528 MiB
+:--- | ---: | ---: | ---:
+B3 with or without Internal Drive | openRC | 1.11.0 | [bubbagenb3img-1.11.0.xz](https://github.com/gordonb3/bubbagen/releases/download/1.11/bubbagenb3img-1.11.0.xz)
+B3 with or without Internal Drive | systemd | 1.11.5 | [bubbagenb3img-1.11.5.xz](https://github.com/gordonb3/bubbagen/releases/download/1.11/bubbagenb3img-1.11.5.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.10/bubbagenb3img-1.10.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/1.11/bubbagenb3img-1.11.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -53,10 +53,12 @@ The above `xzcat` to the USB key will take some time, due to the decompression (
 
 Begin with your B3 powered off and the power cable removed. Insert the USB key into either of the USB slots on the back of the B3, and make sure the other USB slot is unoccupied. Connect your B3 into your local network (or directly to your ADSL router, cable modem etc., if you wish) using the **wan** Ethernet port. Then, *while holding down the button on the back of the B3*, apply power (insert the power cable). After two seconds or so, release the button. If all is well, the B3 should boot the kernel off of the USB key (rather than the internal drive), and then proceed to mount the root partition (also from the USB key) and start Gentoo. This will all take about 40 seconds or so. The LED on the front of the B3 should:
 
-1. first, turn **green**, for a few seconds, as the kernel loads; then,
-1. turn **purple** for about 20 seconds while the system is initializing; and finally,
+1. first, turn **green**, for about 30 seconds, as the bootloader is starting; then,
+1. turn **off** for about 5 seconds as the real kernel is loading, then 
+1. turn **purple** for about one and a half minute while the system is initializing; and finally,
 1. turn **green** again when the system is fully functional.
 
+> The `purple` state will use 15 seconds less if you attach the WAN port to a valid existing network
 > The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive (stock Sakaki gentoo-on-b3 will also show green LED when runing from harddrive)
 
 After the LED turns green in step 3, above, you should be able to log in, via `ssh`, per the following instructions.
@@ -64,8 +66,8 @@ After the LED turns green in step 3, above, you should be able to log in, via `s
 ## Connecting to the B3
 
 First, connect your client PC (or Mac etc.) to the **lan** Ethernet port of your B3 (you can use a regular Ethernet cable for this, the B3's ports are autosensing). WiFi is disabled. Once booted, you can use your browser to connect to the B3 through [http://b3](http://b3), where you should see the familiar Excito B3 admin. The default username and password for the administrator account is:
-&nbsp; &nbsp; **Username: admin**    
-&nbsp; &nbsp; **Password: admin**    
+**&nbsp; &nbsp; Username: admin**    
+**&nbsp; &nbsp; Password: admin**    
 
 As a security measure, it is strongly recommended to change the admin password. Please reference the Excito manual ([online version on your booted B3](http://b3/manual))
 
@@ -93,18 +95,30 @@ If you have previously connected to a *different* machine with the *same* IP add
 For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
-The following changes to the original 1.8.0 release from Sakaki apply:
+The following major changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.10.x images use kernel version 4.9.49-r1, which is the current Gentoo stable kernel (although still marked as testing on arm). The kernels are essentially the same, but differ in what init system they call after loading.
+1. Both 1.11.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply 
+editing a `boot.ini` file.
 
-1. Both 1.10.x images have been brought up to date against the Gentoo tree as of 29 Dec 2017. The full set of packages in the image may be viewed [here (1.10.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.0) and [here (1.10.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.10.5).
+2. The image supplied kernel is version 4.14.52 and supports both openrc and systemd init systems. 
+
+1. Both 1.11.x images have been brought up to date against the Gentoo tree as of 10 Aug 2018. The full set of packages in the image may be viewed [here 
+(1.11.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.0) and [here (1.11.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.11.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
 
-## Changes since version 1.9.1-r1 (systemd: 1.9.6-r1)
+## Changes since version 1.10.0 (systemd: 1.10.5)
+
+* switched to Gentoo profile 17 (including full rebuild of all installed packages for position-independent loading)
+* reorganized package masks, combining bindist USE flag conflicts in a single file
+* improved install script behaviour (allow to keep home partition, create the correct partition table, ...)
+* various updates and fixes to the bubba-overlay
+* all packages brought up to date against the portage tree at Aug 10, 2018
+
+## Earlier changes
 
 * dropped mediatomb from package list (this package has in fact been unmanaged by the interface since Excito software version 2.4)
 * java VM updated to openjdk 8
@@ -112,7 +126,6 @@ Have fun! ^-^
 * fixed unability to print non-native documents (due to deadlock in Ghostscript)
 * block enabling the WiFi AP when LAN is set to receive its IP through DHCP (causes network to fail)
 * fixed a problem with restarting network interfaces in systemd version
-* all packages brought up to date against the portage tree at Jan 10, 2018
 
 ## Miscellaneous Points
 
@@ -140,7 +153,9 @@ If you like Bubbagen, and want to set it up permanently on the B3's internal har
 * /dev/sda3 as a 20GiB root partition, and format it `ext4`.
 * /dev/sda4 as a home partition using the rest of the drive, and format it `ext4`.
 
-> The script [`/root/install_on_sda.sh`](file:///) will automatically decide between creating a new DOS or GPT partition table; if you want to force selection (disks <=2TiB only; larger disks will always be GPT), then use fdisk to create the right type partition table prior to running the install script. 
+> If you like the root partition to be bigger you can specify this in `/root/install.ini`
+> The script [`/root/install_on_sda.sh`](file:///) will automatically decide between creating a new DOS or GPT partition table; if you want to force selection (disks 
+<=2TiB only; larger disks will always be GPT), then use fdisk to create the right type partition table prior to running the install script. 
 
 OK, first, boot into the image and then connect to your B3 via `ssh`, as described above. Then simply run the supplied script to install onto your hard drive:
 ```
@@ -176,9 +191,28 @@ Of course, if you changed root's password in the USB image, use that new passwor
 
 Once logged in, feel free to configure your system as you like! Of course, if you're intending to use the B3 as an externally visible server, you should take the usual precautions, such as changing `root`'s password, configuring the firewall, possibly [changing the `ssh` host keys](https://missingm.co/2013/07/identical-droplets-in-the-digitalocean-regenerate-your-ubuntu-ssh-host-keys-now/#how-to-generate-new-host-keys-on-an-existing-server), etc.
 
+
 ### Keeping Your Gentoo System Up-To-Date
 
 Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+
+
+### Upgrading from a previous version of Bubbagen
+
+**Warning** This will still clear your complete system and you will loose any additional packages you installed.
+
+* make a backup of your /etc and /var/lib directories
+* run the installer - make a note that it says it will keep /home before proceeding
+* restore /var/lib
+* restore /etc but keep the following files from the image (remove first, then copy):
+  * /etc/portage/*
+  * /etc/dovecot/*
+  * /etc/php/*
+  * /etc/postfix/master.cf
+  * /etc/profile*
+  * /etc/runlevels/*
+  * /etc/ssh/*
+  * /etc/ssl/*
 
 
 ## Feedback Welcome!
