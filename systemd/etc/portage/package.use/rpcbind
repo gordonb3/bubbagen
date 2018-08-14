@@ -1,0 +1,3 @@
+# warmstarts is a REQUIRED USE constraint on systemd
+net-nds/rpcbind         warmstarts 
+
