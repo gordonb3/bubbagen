@@ -25,7 +25,7 @@ fi
 fi
 
 if [ ! -e /var/lib/bubba/bubba-default-config.tgz ]; then
-	echo "ERROR: bubba-default-config not found. Please reinstall the bubba package" >&2
+	echo "ERROR: bubba-default-config not found. Please reinstall the bubbagen package" >&2
 	exit 1
 fi
 
@@ -163,19 +163,18 @@ fi
 
 # Services config
 echo "Enable basic services"
-delsrvcs="bootled iptables shorewall dhcpcd"
-addsrvcs="apache2 bubba-adminphp bubba-buttond bubba-firewall dnsmasq haveged ntpd samba sshd NetworkManager NetworkManager-dispatcher"
+delsrvcs="bootled iptables shorewall dhcpcd samba"
+addsrvcs="apache2 bubba-adminphp bubba-buttond bubba-firewall dnsmasq haveged ntpd smbd sshd NetworkManager NetworkManager-dispatcher"
 
 for srvc in ${delsrvcs}; do
-	systemctl is-enabled ${srvc} &>/dev/null && systemctl disable ${srvc}
+	systemctl is-enabled ${srvc} &>/dev/null && systemctl disable ${srvc} && systemctl stop ${srvc}
 done
 
 for srvc in ${addsrvcs}; do
-	systemctl is-enabled ${srvc} &>/dev/null || systemctl enable ${srvc}
+	systemctl is-enabled ${srvc} &>/dev/null || systemctl enable ${srvc} && systemctl start ${srvc}
 done
 
 
 echo ""
 echo 'All done! Please reboot to activate the new settings.'
 echo "Then visit http://$(hostname)/admin to get started with Bubbagen."
-

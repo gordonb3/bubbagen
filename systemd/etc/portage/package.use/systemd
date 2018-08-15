@@ -1,3 +1,6 @@
 # Not available on ARM
 sys-apps/systemd	-seccomp
 
+# We require our own patched version of sysvinit
+sys-apps/systemd	-sysv-utils
+
