@@ -4,7 +4,7 @@
 # - add dependencies for bubba-backend
 # - add dependencies for bubba-frontend
 # - replace gdbm support by qdbm
-dev-lang/php              cgi fpm sockets json xml gd pdo crypt imap qdbm -gdbm 
+dev-lang/php              cgi fpm sockets json xml gd pdo imap qdbm -gdbm 
 app-eselect/eselect-php   fpm
 
 # Apache modules
