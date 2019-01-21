@@ -3,7 +3,7 @@ dev-java/antlr:3.5 ~arm
 dev-java/java-config ~arm
 dev-java/stringtemplate ~arm
 dev-libs/antlr-c **
-dev-libs/mini-xml ~arm
+dev-libs/mxml ~arm
 media-sound/forked-daapd **
 sys-apps/baselayout-java ~arm
 virtual/jre ~arm
