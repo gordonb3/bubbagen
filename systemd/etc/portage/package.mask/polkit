@@ -1,0 +1,5 @@
+# See Gentoo bug 675844
+# mozjs/spidermonkey 52.9.1_pre1 causes crash
+>=sys-auth/polkit-0.115
+>=dev-lang/spidermonkey-52
+
