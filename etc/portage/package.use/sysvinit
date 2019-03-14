@@ -1,0 +1,3 @@
+# feroceon USE flag integrates the B3 specific shutdown
+# procedure into the sysvinit routines
+sys-apps/sysvinit feroceon
