@@ -1,3 +1,4 @@
 # dependencies for Roundcube
 
-dev-lang/php  filter gd iconv json pdo session sockets ssl unicode xml
+dev-lang/php  filter gd iconv imap json pdo session sockets ssl unicode xml
+

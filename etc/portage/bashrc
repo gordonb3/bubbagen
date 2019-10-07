@@ -1,0 +1,11 @@
+case ${CATEGORY}/${PN} in
+        sys-devel/distcc | sys-devel/gcc)
+                # Hey man, how come that CONFIG PROTECT don't work?
+                if [ "${EBUILD_PHASE}" == "postinst" ] || [ "${EBUILD_PHASE}" == "postrm" ];
+                then
+                        sleep 20
+                        /usr/local/sbin/distcc-fix &
+                fi
+        ;;
+esac
+

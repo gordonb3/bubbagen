@@ -1,0 +1,3 @@
+# dependencies for Singapore album
+
+dev-lang/php  fileinfo intl exif
