@@ -1,0 +1,24 @@
+#!/bin/bash
+sleep 60
+# We extract $TUPLE from make.conf to avoid editing the script for each architecture.
+TUPLE=$(portageq envvar CHOST)
+GCC_VER=$(gcc-config -c|cut -d "-" -f5)
+cd /usr/lib/distcc/bin
+rm cc c++ gcc g++ gcc-${GCC_VER} g++-${GCC_VER} ${TUPLE}-wrapper
+echo '#!/bin/bash' > ${TUPLE}-wrapper
+echo "exec ${TUPLE}-g\${0:\$[-2]}" "\"\$@\"" >> ${TUPLE}-wrapper
+chmod 755 ${TUPLE}-wrapper
+echo "Bashrc: update crossdev wrapper for distcc"
+echo "cc -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper cc
+echo "c++ -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper c++
+echo "gcc -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper gcc
+echo "g++ -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper g++
+echo "gcc-${GCC_VER} -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper gcc-${GCC_VER}
+echo "g++-${GCC_VER} -> ${TUPLE}-wrapper"
+ln -s ${TUPLE}-wrapper g++-${GCC_VER}
+

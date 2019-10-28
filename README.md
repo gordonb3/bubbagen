@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.14.83 LTS - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.19.52 LTS - Gentoo stable)
 
 ## Description
 
@@ -9,7 +9,7 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **4.14.83** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **4.19.52** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
@@ -66,9 +66,9 @@ After the LED turns green in step 3, above, you should be able to log in, via `s
 
 ## Connecting to the B3
 
-First, connect your client PC (or Mac etc.) to the **lan** Ethernet port of your B3 (you can use a regular Ethernet cable for this, the B3's ports are autosensing). WiFi is disabled. Once booted, you can use your browser to connect to the B3 through [http://b3](http://b3), where you should see the familiar Excito B3 admin. The default username and password for the administrator account is:    
-**&nbsp; &nbsp; Username: admin**    
-**&nbsp; &nbsp; Password: admin**    
+First, connect your client PC (or Mac etc.) to the **lan** Ethernet port of your B3 (you can use a regular Ethernet cable for this, the B3's ports are autosensing). WiFi is disabled. Once booted, you can use your browser to connect to the B3 through [http://b3](http://b3), where you should see the familiar Excito B3 admin. The default username and password for the administrator account is:
+**&nbsp; &nbsp; Username: admin**
+**&nbsp; &nbsp; Password: admin**
 
 As a security measure, it is strongly recommended to change the admin password. Please reference the Excito manual ([online version on your booted B3](http://b3/manual))
 
@@ -109,25 +109,31 @@ The following major changes to the original 1.8.0 release from Sakaki apply:
 
 Have fun! ^-^
 
-## Changes since version 1.11.0 (systemd: 1.11.5)
+## Changes since version 1.12.0 (systemd: 1.12.5)
 
-* various developer language updates: gcc 8.2, php 7.2, perl 5.26
+* various developer language updates: gcc 8.3, php 7.3, perl 5.28
+* removed obsolete php cgi
+* now using nftables as the firewall back-end
+* dropped fixed ruby target -> portage wants to overrule it anyway
+* fixed a memory allocating issue with forked-easyfind
+* installer incorrectly used fdisk GPT commands with DOS partition tables
+* some GUI commands would not be executed because the corresponding
+* application was not inside the searchpath used by bubba-admin
+* systemd version: service control failed because systemd paths were changed
+* GUI updates:
+    * empty postdata on lanupdate would cause the NIC to be set to dynamic IP
+    * fix display of AllowRemote value for admin user
+
+## Earlier changes
+
 * corrected a problem in ghostscript
 * fixed a kernel dependency (systemd)
 * removed dependency on bubba-buttond for the B2
 * explicitly listed `feroceon` USE flag for sys-apps/sysvinit to enforce election of the B3 patched version
-* all packages brought up to date against the portage tree at Mar 14, 2019
-
-## Changes since version 1.10.0 (systemd: 1.10.5)
-
 * switched to Gentoo profile 17 (including full rebuild of all installed packages for position-independent loading)
 * reorganized package masks, combining bindist USE flag conflicts in a single file
 * improved install script behaviour (allow to keep home partition, create the correct partition table, ...)
 * various updates and fixes to the bubba-overlay
-* all packages brought up to date against the portage tree at Aug 10, 2018
-
-## Earlier changes
-
 * dropped mediatomb from package list (this package has in fact been unmanaged by the interface since Excito software version 2.4)
 * java VM updated to openjdk 8
 * fixed a cyclic dependency on bridge interface in hostapd
@@ -153,7 +159,7 @@ Have fun! ^-^
 
 ## <a name="hdd_install">Installing Bubbagen on your B3's Internal Drive (Optional)
 
-If you like Bubbagen, and want to set it up permanently on the B3's internal hard drive, you can do so easily (it takes less than 5 minutes). The full process is described below. (Note, this is strictly optional, you can simply run Bubbagen from the USB key, if you are just experimenting, or using it as a rescue system.)
+If you like Bubbagen, and want to set it up permanently on the B3's internal hard drive, you can do so easily. The full process is described below. (Note, this is strictly optional, you can simply run Bubbagen from the USB key, if you are just experimenting, or using it as a rescue system.)
 
 > **Warning** - the below process will wipe all existing software and data from your internal drive, so be sure to back that up first, before proceeding. It will set up:
 * /dev/sda1 as a 64MiB boot partition, and format it `ext3`;

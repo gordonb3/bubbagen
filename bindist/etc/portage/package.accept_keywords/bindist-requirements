@@ -1,0 +1,9 @@
+# Packages listed in this file require accepting different keywords because they
+# are either marked unstable or experimental. We would normally want to avoid
+# installing such packages, however these are required to allow bubbagen to
+# be distributed as a binary.
+# Should you decide to disable the bindist flag it is recommended that you delete
+# this file to prevent portage giving preference to unstable versions.
+
+# allow v2.0-r1
+<=net-wireless/hostapd-2.2 **
