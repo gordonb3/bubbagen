@@ -3,7 +3,7 @@ case ${CATEGORY}/${PN} in
 		# Hey man, how come that CONFIG PROTECT don't work?
 		if [ "${EBUILD_PHASE}" == "postinst" ] || [ "${EBUILD_PHASE}" == "postrm" ];
 		then
-			/usr/local/sbin/distcc-fix &
+			/usr/share/distcc/distcc-fix &
 		fi
 	;;
 esac

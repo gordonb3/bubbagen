@@ -1,2 +1,8 @@
-# allow v2.0-r1
-net-wireless/hostapd **
+# Packages listed in this file are assigned special USE flags to prevent
+# dependencies being pulled in that may not be distributed as a binary.
+# Should you decide to disable the bindist flag you may lift these USE flags
+# as well by simply deleting this file.
+
+# require internal-tls USE flag to maintain bindist restrictions
+net-wireless/hostapd	internal-tls
+
