@@ -1,0 +1,4 @@
+# nfs-utils 2.4.1 is seriously broken on the B3
+# accept version 2.4.2-r1 per https://bugs.gentoo.org/688644
+=net-fs/nfs-utils-2.4.2-r1 ~arm
+
