@@ -15,8 +15,8 @@ The image may be downloaded from the link below and should work, without modific
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.12.0 | [bubbagenb3img-1.12.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.12/bubbagenb3img-1.12.0.xz)
-B3 with or without Internal Drive | systemd | 1.12.5 | [bubbagenb3img-1.12.5.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.12/bubbagenb3img-1.12.5.xz)
+B3 with or without Internal Drive | openRC | 1.13.0 | [bubbagenb3img-1.13.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.13/bubbagenb3img-1.13.0.xz)
+B3 with or without Internal Drive | systemd | 1.13.5 | [bubbagenb3img-1.13.5.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.13/bubbagenb3img-1.13.5.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.12/bubbagenb3img-1.12.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.13/bubbagenb3img-1.13.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -41,7 +41,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.12.0.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.13.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -93,36 +93,38 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.13/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.12.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
+1. Both 1.13.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
 
-2. The image supplied kernel is version 4.14.83 and supports both openrc and systemd init systems. 
+2. The image supplied kernel is version 4.19.52 and supports both openrc and systemd init systems. 
 
-1. Both 1.12.x images have been brought up to date against the Gentoo tree as of 14 Mar 2019. The full set of packages in the image may be viewed [here (1.12.0)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.12.0) and [here (1.12.5)](https://github.com/gordonb3/bubbagen/blob/master/reference/installed-packages-1.12.5).
+1. Both 1.12.x images have been brought up to date against the Gentoo tree as of 04 Jan 2020. The full set of packages in the image may be viewed [here (1.13.0)](https://github.com/gordonb3/bubbagen/blob/v1.13/reference/installed-packages-1.13.0) and [here (1.13.5)](https://github.com/gordonb3/bubbagen/blob/v1.13/reference/installed-packages-1.13.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
 
-## Changes since version 1.12.0 (systemd: 1.12.5)
+## Changes since version 1.12
 
-* various developer language updates: gcc 8.3, php 7.3, perl 5.28
+* various developer language updates: gcc 8.3, php 7.3, perl 5.30
 * removed obsolete php cgi
 * now using nftables as the firewall back-end
 * dropped fixed ruby target -> portage wants to overrule it anyway
 * fixed a memory allocating issue with forked-easyfind
 * installer incorrectly used fdisk GPT commands with DOS partition tables
-* some GUI commands would not be executed because the corresponding
-* application was not inside the searchpath used by bubba-admin
+* some GUI commands would not be executed because the corresponding application was not inside the searchpath used by bubba-admin
 * systemd version: service control failed because systemd paths were changed
 * GUI updates:
     * empty postdata on lanupdate would cause the NIC to be set to dynamic IP
     * fix display of AllowRemote value for admin user
+* replaced corrupted hosts file
+* package related settings specific to this distribution are now owned by bubbagen package
+* bindist USE flag pre-removed from global make profile
 
 ## Earlier changes
 
@@ -208,7 +210,7 @@ Once logged in, feel free to configure your system as you like! Of course, if yo
 
 ### Keeping Your Gentoo System Up-To-Date
 
-Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/master/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.13/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 ### Upgrading from a previous version of Bubbagen
@@ -227,6 +229,16 @@ Please refer to the corresponding section(s) in the [older README](https://githu
   * /etc/runlevels/*
   * /etc/ssh/*
   * /etc/ssl/*
+
+
+### Redistribution note
+
+As of version 1.13 Bubbagen now ships with the bindist USE flag pre-removed from the global make profile. This will cause a rebuild of several packages that depend on this USE flag when you run updates or install new software that has a dependency on one or more of these packages. Due to patent restrictions you may at that point no longer redistribute Bubbagen. To reinstate the bindist flag you should run the following command:
+
+```
+# USE="bindist" emerge --oneshot --nodeps app-admin/bubbagen
+```
+This does not only set the bindist flag but also includes several package specific masks and USE flags required to handle conflicts with the bindist flag. When you are done installing your additional software and/or updates you can use the same command but now with `USE="-bindist"` to remove the bindist flag and related config files from portage settings.
 
 
 ## Feedback Welcome!
