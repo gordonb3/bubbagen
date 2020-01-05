@@ -111,7 +111,8 @@ Have fun! ^-^
 
 ## Changes since version 1.12
 
-* various developer language updates: gcc 8.3, php 7.3, perl 5.30
+* various developer language updates: gcc 9.2, php 7.3, perl 5.30
+* bootloader revision
 * removed obsolete php cgi
 * now using nftables as the firewall back-end
 * dropped fixed ruby target -> portage wants to overrule it anyway
