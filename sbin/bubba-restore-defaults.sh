@@ -171,6 +171,7 @@ for srvc in ${addsrvcs}; do
 	rc-update add ${srvc} default &>/dev/null && rc-service -iN ${srvc} start
 done
 
+chmod +x /etc/local.d/*.{start,stop}
 
 echo ""
 echo 'All done! Please reboot to activate the new settings.'
