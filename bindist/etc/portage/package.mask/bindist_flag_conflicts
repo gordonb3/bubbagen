@@ -16,7 +16,7 @@
 #
 # force using the 0.10.x version from bubba repository
 # it is sufficient for our needs
->=net-libs/nodejs-0.11
+# >=net-libs/nodejs-0.11
 
 
 # latest versions of dev-python/cryptography require EC support in openssl

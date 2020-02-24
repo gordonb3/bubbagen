@@ -1,0 +1,3 @@
+# new nodejs does not appear to support our CPU
+>=net-libs/nodejs-0.11
+
