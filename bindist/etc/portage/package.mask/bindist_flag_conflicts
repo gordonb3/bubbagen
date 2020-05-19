@@ -37,6 +37,3 @@
 =net-mail/dovecot-2.2.25
 
 
-# requires bindist flag to be disabled
->app-portage/layman-2.4.2
-
