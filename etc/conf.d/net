@@ -12,4 +12,14 @@ fallback_eth1="192.168.10.1 netmask 255.255.255.0 brd 192.168.10.255"
 
 # null setup for wlan0 (WiFi adaptor)
 # (this will be owned by hostapd, if present on your system)
+modules_wlan0="!iw !iwconfig !wpa_supplicant"
 config_wlan0="null"
+
+# prevent hostapd failure due to soft-blocked radio
+preup() {
+  if [ "${IFACE}" = "wlan0" ] ; then
+     rfkill unblock all
+  fi
+  return 0
+}
+
