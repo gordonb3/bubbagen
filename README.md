@@ -216,7 +216,7 @@ Please refer to the corresponding section(s) in the [older README](https://githu
 
 ### Upgrading from a previous version of Bubbagen
 
-**Warning** This will still clear your complete system and you will loose any additional packages you installed.
+**Warning** This will still clear your complete system and you will lose any additional packages you installed.
 
 * make a backup of your /etc and /var/lib directories
 * run the installer - make a note that it says it will keep /home before proceeding
