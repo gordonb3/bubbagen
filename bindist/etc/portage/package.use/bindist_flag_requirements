@@ -4,5 +4,5 @@
 # as well by simply deleting this file.
 
 # require internal-tls USE flag to maintain bindist restrictions
-net-wireless/hostapd	internal-tls
+net-wireless/hostapd	internal-tls -suiteb
 
