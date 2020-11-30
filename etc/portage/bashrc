@@ -1,5 +1,5 @@
 case ${CATEGORY}/${PN} in
-	sys-devel/distcc | sys-devel/gcc)
+	sys-devel/distcc | sys-devel/gcc | sys-devel/gcc-config)
 		# Hey man, how come that CONFIG PROTECT don't work?
 		if [ "${EBUILD_PHASE}" == "postinst" ] || [ "${EBUILD_PHASE}" == "postrm" ];
 		then
