@@ -1,0 +1,20 @@
+From: Gordon Bos <gordon@bosvangennip.nl>
+Date: Wed, 14 Apr 2021 13:40:12 +0200
+Subject: media-video/ffmpeg-4.4 fails to link to libatomic on ARM
+
+On ARM the atomic library is not automatically linked with recent
+versions of GCC. This patch instructs the configure script to
+explicitely include atomic when linking.
+
+--- a/configure
++++ b/configure
+@@ -4125,6 +4125,8 @@
+     esac
+ done
+ 
++add_extralibs -latomic
++
+ for e in $env; do
+     eval "export $e"
+ done
+

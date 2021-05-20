@@ -1,0 +1,12 @@
+--- a/src/input.h
++++ b/src/input.h
+@@ -137,7 +137,7 @@
+ /*
+  * Input modules should use this to test if playback should end
+  */
+-int input_loop_break;
++static int input_loop_break;
+ 
+ /*
+  * Transfer stream data to the player's input buffer. The input evbuf will be
+
