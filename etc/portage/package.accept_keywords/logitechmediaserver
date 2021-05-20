@@ -34,6 +34,7 @@ dev-perl/Devel-GlobalDestruction ~arm
 dev-perl/EV **
 dev-perl/Encode-Detect ~arm
 dev-perl/File-Find-Rule ~arm
+dev-perl/File-Remove ~arm
 dev-perl/GD ~arm
 dev-perl/GD-Graph3d ~arm
 dev-perl/GDGraph ~arm
@@ -50,7 +51,9 @@ dev-perl/Log-Log4perl ~arm
 dev-perl/MRO-Compat ~arm
 dev-perl/Math-Base36 **
 dev-perl/Module-Find **
+dev-perl/Module-Install ~arm
 dev-perl/Module-Runtime ~arm
+dev-perl/Module-ScanDeps ~arm
 dev-perl/Moo **
 dev-perl/Number-Compare ~arm
 dev-perl/Path-Class ~arm
