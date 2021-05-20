@@ -1,6 +1,9 @@
 # Not available on ARM
 sys-apps/systemd	-seccomp
 
-# We require our own patched version of sysvinit
+# We require our own patched version of sysvinit for shutdown routine
 sys-apps/systemd	-sysv-utils
 
+# We do not have apps that require root rights running as a different user
+#  -> prevents python:2.7 being pulled in
+sys-apps/systemd	-policykit
