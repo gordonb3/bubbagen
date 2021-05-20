@@ -1,0 +1,16 @@
+NetworkManager needs to accept dhcpcd static profile to allow
+the bubbagen LIVE USB to have a fallback fixed address on its
+LAN port.
+
+Patch by Gordon Bos
+
+--- a/src/dhcp-manager/nm-dhcp-client.c
++++ b/src/dhcp-manager/nm-dhcp-client.c
+@@ -311,6 +311,7 @@
+ {
+ 	if (g_ascii_strcasecmp (reason, "bound") == 0 ||
+ 	    g_ascii_strcasecmp (reason, "bound6") == 0 ||
++	    g_ascii_strcasecmp (reason, "static") == 0 ||
+ 	    g_ascii_strcasecmp (reason, "renew") == 0 ||
+ 	    g_ascii_strcasecmp (reason, "renew6") == 0 ||
+ 	    g_ascii_strcasecmp (reason, "reboot") == 0 ||
