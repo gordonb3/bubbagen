@@ -4,8 +4,8 @@ LAN port.
 
 Patch by Gordon Bos
 
---- a/src/core/dhcp/nm-dhcp-client.c
-+++ b/src/core/dhcp/nm-dhcp-client.c
+--- a/src/dhcp/nm-dhcp-client.c
++++ b/src/dhcp/nm-dhcp-client.c
 @@ -355,7 +355,8 @@
  static NMDhcpState
  reason_to_state(NMDhcpClient *self, const char *iface, const char *reason)
