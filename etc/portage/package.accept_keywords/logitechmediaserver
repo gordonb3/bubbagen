@@ -56,6 +56,7 @@ dev-perl/Module-Runtime ~arm
 dev-perl/Module-ScanDeps ~arm
 dev-perl/Moo **
 dev-perl/Number-Compare ~arm
+dev-perl/PAR-Dist ~arm
 dev-perl/Path-Class ~arm
 dev-perl/Role-Tiny **
 dev-perl/SQL-Abstract **
