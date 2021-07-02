@@ -1,18 +1,8 @@
-# Requirements for Bubba UI backend and frontend
+# Requirements for Bubba UI
 
 dev-perl/Config-Simple **
-dev-perl/Config-Tiny **
 dev-perl/Crypt-PasswdMD5 ~arm
-dev-perl/Expect ~arm
-dev-perl/IO-Stty ~arm
-dev-perl/IPC-Run **
 
 dev-php/PEAR-Net_URL2 ~arm
 dev-php/PEAR-HTTP_Request2 ~arm
-
-dev-ruby/coffee-script ~arm
-dev-ruby/coffee-script-source ~arm
-dev-ruby/execjs ~arm
-
-
 
