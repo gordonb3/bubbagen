@@ -1,4 +1,4 @@
-app-admin/bubba-backend         nftables -iptables
-sys-apps/iproute2               -iptables
-net-firewall/iptables           nftables
+app-admin/bubba-admin		nftables -iptables
+sys-apps/iproute2		-iptables
+net-firewall/iptables		nftables
 
