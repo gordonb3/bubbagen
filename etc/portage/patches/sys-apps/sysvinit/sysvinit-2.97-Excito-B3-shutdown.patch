@@ -1,0 +1,146 @@
+diff -ru a/src/shutdown.c b/src/shutdown.c
+--- a/src/shutdown.c	2019-03-13 17:35:06.109262657 +0100
++++ b/src/shutdown.c	2019-03-13 17:35:32.229951872 +0100
+@@ -64,6 +64,17 @@
+ #include "reboot.h"
+ #include "initreq.h"
+ #include "init.h"
++#include <mtd/mtd-user.h>
++#include <stddef.h>
++#include <sys/ioctl.h>
++
++#ifndef MTD_PART
++#define MTD_PART	"/dev/mtd2"
++#endif
++
++#define BLOCK_START	0x110000
++#define BLOCK_SIZE	0x10000
++#define B3_HALT_MAGIC	0xdeadbeef
+ 
+ #ifdef __FreeBSD__
+ extern char **environ;
+@@ -80,6 +91,7 @@
+ 
+ int dontshut = 0;	/* Don't shutdown, only warn	*/
+ char down_level[2];	/* What runlevel to go to.	*/
++char B3_down_level[2];	/* What runlevel to use for B3.	*/
+ int dosync = 1;		/* Sync before reboot or halt	*/
+ int fastboot = 0;	/* Do a 'fast' reboot		*/
+ int forcefsck = 0;	/* Force fsck on reboot		*/
+@@ -163,6 +175,40 @@
+ }
+ 
+ 
++
++/*
++ *	Write magic to flash memory to halt Excito B3.
++ */
++static int write_magic(unsigned long value){
++	struct erase_info_user erase;
++	int fd;
++
++	if( (fd = open(MTD_PART,O_RDWR)) == -1){
++		syslog(LOG_ERR,"Failed to open device: %m");
++		return 1;
++	}
++
++	erase.start = BLOCK_START;
++	erase.length = BLOCK_SIZE;
++	if (ioctl (fd, MEMERASE, &erase) != 0) {
++		syslog(LOG_ERR,"Erase block failed: %m");
++		return 1;
++	}
++
++	if(lseek(fd, BLOCK_START, SEEK_SET) == -1) {
++		syslog(LOG_ERR,"Failed to seek to block: %m");
++		return 1;
++	}
++
++	if( write(fd,&value,sizeof(value)) != sizeof(value)){
++		syslog(LOG_ERR,"Failed to write value: %m");
++		return 1;
++	}
++
++	close(fd);
++	return 0;
++} 
++
+ /*
+  *	Set environment variables in the init process.
+  */
+@@ -423,6 +469,11 @@
+ 	char	*args[8];
+ 	int	argp = 0;
+ 	int	do_halt = (down_level[0] == '0');
++	int	magic_written = 0;
++	char	*B3_halttype = NULL;
++
++	/* Do not use halt on the Excito B3 */
++	B3_down_level[0] = '6';
+ 
+ 	/* Warn for the last time */
+ 	issue_warn(0);
+@@ -431,10 +482,19 @@
+ 		stopit(0);
+ 	}
+ 	openlog("shutdown", LOG_PID, LOG_USER);
+-	if (do_halt)
+-  		syslog(LOG_NOTICE, "shutting down for system halt");
+-	else
++	if (do_halt){
++		/* Let the log reflect that the system reboots if write magic fails */
++		if(write_magic(B3_HALT_MAGIC)==0){
++			magic_written = 1;
++			syslog(LOG_NOTICE, "successfully wrote B3 halt magic value");
++	  		syslog(LOG_NOTICE, "shutting down for system halt");
++		}else{
++			syslog(LOG_ERR, "failed to write B3 halt magic value");
++			syslog(LOG_NOTICE, "shutting down for system reboot");
++		}
++	}else{
+ 		syslog(LOG_NOTICE, "shutting down for system reboot");
++	}
+ 	closelog();
+ 
+ 	/* See if we have to do it ourself. */
+@@ -446,7 +506,7 @@
+ 		args[argp++] = "-t";
+ 		args[argp++] = sltime;
+ 	}
+-	args[argp++] = down_level;
++	args[argp++] = B3_down_level;
+ 	args[argp]   = (char *)NULL;
+ 
+ 	unlink(SDPID);
+@@ -454,7 +514,7 @@
+ 
+ 	/* Now execute init to change runlevel. */
+ 	sync();
+-	init_setenv("INIT_HALT", halttype);
++	init_setenv("INIT_HALT", B3_halttype);
+ 	execv(INIT, args);
+ 
+ 	/* Oops - failed. */
+@@ -464,6 +524,13 @@
+ 	init_setenv("INIT_HALT", NULL);
+ 	openlog("shutdown", LOG_PID, LOG_USER);
+ 	syslog(LOG_NOTICE, "shutdown failed");
++	if (magic_written){
++		if(write_magic(0)==0){
++			syslog(LOG_NOTICE, "successfully cleared B3 halt magic value");
++		}else{
++			syslog(LOG_ERR, "failed to clear B3 halt magic value, system will still halt at next reboot");
++		}
++	}
+ 	closelog();
+ 	exit(1);
+ }
+@@ -546,6 +613,7 @@
+   		exit(1);
+ 	}
+ 	strcpy(down_level, "S");
++	strcpy(B3_down_level, "S");
+ 	halttype = NULL;
+         memset(when, '\0', WHEN_SIZE);
+ 
+

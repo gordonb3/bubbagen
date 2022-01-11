@@ -1,0 +1,12 @@
+post_src_prepare()
+{
+	# Excito B3 specific entries
+
+	# we only need the serial console on headless system
+	elog "Mung inittab for Excito B3 architecture"
+	sed -i \
+		-e "s/^\(c[0-9]:\)/#\1/" \
+		-e "s/^#*\(s0:.*\-L\)  *[0-9]*  *\(.*\)$/\1 115200 \2/" \
+		${WORKDIR}/inittab
+}
+

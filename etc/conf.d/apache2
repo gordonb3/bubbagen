@@ -43,7 +43,9 @@ APACHE2_OPTS="-D INFO -D SSL -D LANGUAGE -D PROXY -D PHP -D PROXY_HTML"
 # via them will result in Apache failing to start
 # YOU HAVE BEEN WARNED.
 
-# PID file
+# PID file.
+# You need to set "PidFile" in httpd.conf as well if you change this from the
+# default (which is /var/run/apache2.pid)
 #PIDFILE=/var/run/apache2.pid
 
 # timeout for startup/shutdown checks
