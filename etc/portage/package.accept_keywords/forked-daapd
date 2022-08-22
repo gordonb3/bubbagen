@@ -1,5 +1,8 @@
 app-eselect/eselect-java ~arm
+dev-java/antlr:0 ~arm
 dev-java/antlr:3.5 ~arm
+dev-java/antlr-runtime:3.5 ~arm
+dev-java/antlr-tool:3.5 ~arm
 dev-java/java-config ~arm
 dev-java/stringtemplate ~arm
 dev-libs/antlr-c **

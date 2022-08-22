@@ -81,4 +81,5 @@ perl-core/IO **
 perl-core/IPC-Cmd ~arm
 perl-core/Module-CoreList ~arm
 perl-core/version ~arm
+virtual/perl-Module-CoreList ~arm
 
