@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 4.19.52 LTS - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 5.15.41 - Gentoo stable)
 
 ## Description
 
@@ -9,14 +9,14 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
 
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **5.10.27** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **5.15.41** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.14.0 | [bubbagenb3img-1.14.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.14/bubbagenb3img-1.14.0.xz)
-B3 with or without Internal Drive | systemd | 1.14.5 | [bubbagenb3img-1.14.5.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.14/bubbagenb3img-1.14.5.xz)
+B3 with or without Internal Drive | openRC | 1.15.0 | [bubbagenb3img-1.15.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.15/bubbagenb3img-1.15.0.xz)
+B3 with or without Internal Drive | systemd | 1.15.5 | [bubbagenb3img-1.15.5.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.15/bubbagenb3img-1.15.5.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.14/bubbagenb3img-1.14.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.15/bubbagenb3img-1.15.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -41,7 +41,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.14.0.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.15.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -93,21 +93,27 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.14/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
-1. Both 1.14.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
+1. Both 1.15.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
 
-2. The image supplied kernel is version 5.10.27 and supports both openrc and systemd init systems. 
+2. The image supplied kernel is version 5.15.41 and supports both openrc and systemd init systems. 
 
-1. Both 1.14.x images have been brought up to date against the Gentoo tree as of 01 Jul 2021. The full set of packages in the image may be viewed [here (1.14.0)](https://github.com/gordonb3/bubbagen/blob/v1.14/reference/installed-packages-1.14.0) and [here (1.14.5)](https://github.com/gordonb3/bubbagen/blob/v1.14/reference/installed-packages-1.14.5).
+1. Both 1.15.x images have been brought up to date against the Gentoo tree as of 01 Jul 2021. The full set of packages in the image may be viewed [here (1.15.0)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.0) and [here (1.15.5)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
 
 Have fun! ^-^
+
+## Changes since version 1.14
+
+* fixed the old sakaki repos to conform to minimal EAPI
+* various developer language updates: gcc 11.3, php 8.1, perl 5.34
+* kernel: added support for latest gen Intel wifi adapters
 
 ## Changes since version 1.13
 
@@ -224,7 +230,7 @@ Once logged in, feel free to configure your system as you like! Of course, if yo
 
 ### Keeping Your Gentoo System Up-To-Date
 
-Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.14/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 ### Upgrading from a previous version of Bubbagen
