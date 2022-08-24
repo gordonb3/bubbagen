@@ -5,8 +5,8 @@ Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (ker
 ## Description
 
 <img src="https://raw.githubusercontent.com/gordonb3/cache/master/Bubba/Excito-B3.jpg" alt="Excito B3" width="250px" align="right"/>
-This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.com/sakaki-/gentoo-on-b3) and contains what was previously published as the `Special Edition` while the Bubba overlay was still in beta.
-
+This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.com/sakaki-/gentoo-on-b3) and contains what was previously published as the `Special Edition` while the Bubba overlay was still in beta.<br><br>
+  
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](http://www.denx.de/wiki/U-Boot/WebHome) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
 The kernel used in the image is **5.15.41** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
@@ -60,7 +60,7 @@ Begin with your B3 powered off and the power cable removed. Insert the USB key i
 
 > The `purple` state will use 15 seconds less if you attach the WAN port to a valid existing network
 
-> The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive (stock Sakaki gentoo-on-b3 will also show green LED when runing from harddrive)
+> The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive (stock Sakaki gentoo-on-b3 will also show green LED when running from harddrive)
 
 After the LED turns green in step 3, above, you should be able to log in, via `ssh`, per the following instructions.
 
@@ -102,16 +102,16 @@ The following major changes to the original 1.8.0 release from Sakaki apply:
 
 2. The image supplied kernel is version 5.15.41 and supports both openrc and systemd init systems. 
 
-1. Both 1.15.x images have been brought up to date against the Gentoo tree as of 01 Jul 2021. The full set of packages in the image may be viewed [here (1.15.0)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.0) and [here (1.15.5)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.5).
+1. Both 1.15.x images have been brought up to date against the Gentoo tree as of 21 Aug 2022. The full set of packages in the image may be viewed [here (1.15.0)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.0) and [here (1.15.5)](https://github.com/gordonb3/bubbagen/blob/v1.15/reference/installed-packages-1.15.5).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
-> Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be quite CPU intensive and the B3 may run quite hot and use more power than when running an OS.
+> Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be pretty CPU intensive and the B3 may run quite hot and even use more power than when running an OS.
 
 Have fun! ^-^
 
 ## Changes since version 1.14
 
-* fixed the old sakaki repos to conform to minimal EAPI
+* fixed the old sakaki repos to conform to minimal EAPI requirements
 * various developer language updates: gcc 11.3, php 8.1, perl 5.34
 * kernel: added support for latest gen Intel wifi adapters
 
