@@ -1,0 +1,20 @@
+From: Gordon Bos <gordon@bosvangennip.nl>
+Date: Wed, 3 May 2022 16:07:46 +0200
+Subject: dev-libs/apr-1.7.2 fails to link to libatomic on 32 bit architecture
+
+On 32 bit architecture the atomic library is not automatically linked with
+recent versions of GCC. This patch instructs the configure script to
+explicitely include atomic "as-needed" when linking.
+
+--- a/configure.in
++++ b/configure.in
+@@ -293,7 +293,7 @@
+ if test "x$use_libtool" = "xyes"; then
+       lt_compile='$(LIBTOOL) $(LTFLAGS) --mode=compile --tag=CC $(COMPILE) -o $@ -c $< && touch $@'
+       LT_VERSION="-version-info `$get_version libtool $version_hdr APR`"
+-      link="\$(LIBTOOL) \$(LTFLAGS) --mode=link --tag=CC \$(COMPILE) \$(LT_LDFLAGS) \$(LT_VERSION) \$(ALL_LDFLAGS) -o \$@"
++      link="\$(LIBTOOL) \$(LTFLAGS) --mode=link --tag=CC \$(COMPILE) \$(LT_LDFLAGS) \$(LT_VERSION) \$(ALL_LDFLAGS) -Wl,--as-needed -latomic -o \$@"
+       so_ext='lo'
+       lib_target='-rpath $(libdir) $(OBJECTS)'
+       export_lib_target='-rpath \$(libdir) \$(OBJECTS)'
+
