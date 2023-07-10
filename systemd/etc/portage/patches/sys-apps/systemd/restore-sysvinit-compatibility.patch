@@ -1,0 +1,42 @@
+From: Gordon Bos <gordon@bosvangennip.nl>
+Date: Wed, 10 Jul 2023 16:08:12 +0200
+Subject: unwelcome forced disabling of sysvinit compatibility
+
+In all their wisdom Gentoo devs have forcibly disabled sysvinit
+compatibility, however on the B3 we require this compatibility
+for correct handling of the power button. This patch circumvents
+the raised issue by ignoring the configure options that are
+being passed by the ebuild
+
+
+diff -ru a/meson.build b/meson.build
+--- a/meson.build
++++ b/meson.build
+@@ -108,8 +108,8 @@
+ 
+ have_standalone_binaries = get_option('standalone-binaries')
+ 
+-sysvinit_path = get_option('sysvinit-path')
+-sysvrcnd_path = get_option('sysvrcnd-path')
++sysvinit_path = get_option('b3-sysvinit-path')
++sysvrcnd_path = get_option('b3-sysvrcnd-path')
+ conf.set10('HAVE_SYSV_COMPAT', sysvinit_path != '' and sysvrcnd_path != '',
+            description : 'SysV init scripts and rcN.d links are supported')
+ conf.set10('CREATE_LOG_DIRS', get_option('create-log-dirs'))
+diff -ru a/meson_options.txt b/meson_options.txt
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -43,8 +43,12 @@
+ 
+ option('sysvinit-path', type : 'string', value : '/etc/init.d',
+        description : 'the directory where the SysV init scripts are located')
++option('b3-sysvinit-path', type : 'string', value : '/etc/init.d',
++       description : 'the directory where the SysV init scripts are located')
+ option('sysvrcnd-path', type : 'string', value : '/etc/rc.d',
+        description : 'the base directory for SysV rcN.d directories')
++option('b3-sysvrcnd-path', type : 'string', value : '/etc/rc.d',
++       description : 'the base directory for SysV rcN.d directories')
+ option('telinit-path', type : 'string', value : '/lib/sysvinit/telinit',
+        description : 'path to telinit')
+ option('rc-local', type : 'string',
+

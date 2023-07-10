@@ -1,0 +1,7 @@
+post_src_install()
+{
+                rm -f "${ED}${rootprefix}"/sbin/{halt,init,poweroff,reboot,runlevel,shutdown,telinit}
+                rm -f "${ED}"/usr/share/man/man1/init.1
+                rm -f "${ED}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8
+}
+

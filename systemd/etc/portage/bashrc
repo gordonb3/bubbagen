@@ -1,0 +1,18 @@
+case ${CATEGORY}/${PN} in
+        sys-devel/distcc | sys-devel/gcc | sys-devel/gcc-config)
+                # Hey man, how come that CONFIG PROTECT don't work?
+                if [ "${EBUILD_PHASE}" == "postinst" ] || [ "${EBUILD_PHASE}" == "postrm" ];
+                then
+                    	/usr/share/distcc/distcc-fix &
+                fi
+        ;;
+esac
+
+
+if [ "${EBUILD_PHASE_FUNC}" == "pkg_preinst" ];
+then
+	# prevent spamming the log with non matching servive names in /etc/init.d
+    	rm -v ${ED}/etc/init.d/*
+    	rmdir -v ${ED}/etc/init.d
+fi
+
