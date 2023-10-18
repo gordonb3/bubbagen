@@ -1,9 +1,10 @@
+#!/bin/sh
 sleep 60
 # We extract $TUPLE from make.conf to avoid editing the script for each architecture.
 TUPLE=$(portageq envvar CHOST)
 cd /usr/lib/distcc/bin
 rm -f ${TUPLE}-wrapper
-echo '#!/bin/bash' > ${TUPLE}-wrapper
+echo '#!/bin/sh' > ${TUPLE}-wrapper
 echo "exec ${TUPLE}-g\${0:\$[-2]}" "\"\$@\"" >> ${TUPLE}-wrapper
 chmod 755 ${TUPLE}-wrapper
 echo "Bashrc: update crossdev wrapper for distcc"
