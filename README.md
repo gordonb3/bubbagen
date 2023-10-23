@@ -1,6 +1,6 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 6.1.12 - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 6.1.41 - Gentoo stable)
 
 ## Description
 
@@ -9,14 +9,14 @@ This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.c
   
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](https://www.denx.de/project/u-boot/) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **6.1.12** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **6.1.41** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.16.0 | [bubbagenb3img-1.16.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.16/bubbagenb3img-1.16.0.xz)
-B3 with or without Internal Drive | systemd | 1.16.5 | [bubbagenb3img-1.16.5.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.16/bubbagenb3img-1.16.5.xz)
+B3 with or without Internal Drive | openRC | 1.16.1 | [bubbagenb3img-1.16.1.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.17/bubbagenb3img-1.16.1.xz)
+B3 with or without Internal Drive | systemd | 1.16.6 | [bubbagenb3img-1.16.6.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.17/bubbagenb3img-1.16.6.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -32,7 +32,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.16/bubbagenb3img-1.16.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.17/bubbagenb3img-1.16.1.xz
 ```
 to fetch the compressed disk image file
 
@@ -41,7 +41,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.16.0.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.16.1.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -93,16 +93,16 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.16/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
 1. Both 1.16.x images now use the same generic kernel that is loaded through a second stage bootloader that allows you to change kernel command line parameters by simply editing a `boot.ini` file.
 
-2. The image supplied kernel is version 6.1.12 and supports both openrc and systemd init systems. 
+2. The image supplied kernel is version 6.1.41 and supports both openrc and systemd init systems. 
 
-1. Both 1.16.x images have been brought up to date against the Gentoo tree as of 21 Aug 2022. The full set of packages in the image may be viewed [here (1.16.0)](https://github.com/gordonb3/bubbagen/blob/v1.16/reference/installed-packages-1.16.0) and [here (1.16.5)](https://github.com/gordonb3/bubbagen/blob/v1.16/reference/installed-packages-1.16.5).
+1. Both 1.16.x images have been brought up to date against the Gentoo tree as of 18 Oct 2023. The full set of packages in the image may be viewed [here (1.16.1)](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/installed-packages-1.16.1) and [here (1.16.6)](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/installed-packages-1.16.6).
 
 1. The bubbagen images have sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be pretty CPU intensive and the B3 may run quite hot and even use more power than when running an OS.
@@ -111,77 +111,56 @@ Have fun! ^-^
 
 ## Changes since version 1.15
 * kernel: smaller core due to full revision of config, removing obsolete
-* various developer language updates: gcc 12.2, perl 5.36, python 11
+* developer language updates: gcc 13.2, perl 5.38
 * fixed an issue with bubba-admin ebuild going into deadlock during post-install
 * updated Logitech Media Server to the latest stable version 8.3.1
 * re-added Tor anonymous communication router to @bubba set
-* removed Easyfind client - service is due to be terminated in June 2023
+* removed Easyfind client - service was terminated in June 2023
 
 ## Changes since version 1.14
 
 * fixed the old sakaki repos to conform to minimal EAPI requirements
-* various developer language updates: gcc 11.3, php 8.1, perl 5.34
 * kernel: added support for latest gen Intel wifi adapters
 
-## Changes since version 1.13
+## Older changes
 
+* switch to user patches to handle platform specific changes to ebuilds more reliably
 * disabled torrent support in net-p2p/filetransferdaemon
 * consolidated the bubba admin packages to a single package
 * removed build dependency on resources unfriendly ruby, nodejs and spidermonkey
 * the bubbagen kernel is now a binary package
-* added wireguard VPN support
-* various developer language updates: gcc 10.3, php 7.4, perl 5.32
+* kernel: added wireguard VPN support
 * due to Sakaki's retirement the following repositories have been cleaned and marked user_defined:
    * gentoo-b3: deleted all except sys-kernel/buildkernel-b3
    * sakaki-tools: deleted all except app-portage/genup and app-portage/showem
 * systemd: corrected enforced dependency on systemd-resolved
-
-## Changes since version 1.12
-
-* various developer language updates: gcc 9.2, php 7.3, perl 5.30
 * bootloader revision
 * removed obsolete php cgi
 * now using nftables as the firewall back-end
 * dropped fixed ruby target -> portage wants to overrule it anyway
-* fixed a memory allocating issue with forked-easyfind
-* installer incorrectly used fdisk GPT commands with DOS partition tables
 * some GUI commands would not be executed because the corresponding application was not inside the searchpath used by bubba-admin
 * systemd version: service control failed because systemd paths were changed
 * GUI updates:
     * empty postdata on lanupdate would cause the NIC to be set to dynamic IP
     * fix display of AllowRemote value for admin user
-* replaced corrupted hosts file
 * package related settings specific to this distribution are now owned by bubbagen package
 * bindist USE flag pre-removed from global make profile
-
-## Earlier changes
-
-* corrected a problem in ghostscript
-* fixed a kernel dependency (systemd)
-* removed dependency on bubba-buttond for the B2
-* explicitly listed `feroceon` USE flag for sys-apps/sysvinit to enforce election of the B3 patched version
 * switched to Gentoo profile 17 (including full rebuild of all installed packages for position-independent loading)
 * reorganized package masks, combining bindist USE flag conflicts in a single file
-* improved install script behaviour (allow to keep home partition, create the correct partition table, ...)
-* various updates and fixes to the bubba-overlay
 * dropped mediatomb from package list (this package has in fact been unmanaged by the interface since Excito software version 2.4)
-* java VM updated to openjdk 8
-* fixed a cyclic dependency on bridge interface in hostapd
-* fixed unability to print non-native documents (due to deadlock in Ghostscript)
 * block enabling the WiFi AP when LAN is set to receive its IP through DHCP (causes network to fail)
-* fixed a problem with restarting network interfaces in systemd version
 
 ## Miscellaneous Points
 
 * The image is subscribed to the following overlays:
-  * [`sakaki-tools`](https://github.com/sakaki-/sakaki-tools): this overlay (provided by Sakaki) provides the tools `showem` ([source](https://github.com/sakaki-/showem), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/showem.pdf)) and `genup` ([source](https://github.com/sakaki-/genup), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/genup.pdf)). (Note - these replace the old `showem-lite` and `genup-lite` tools.)
-  * [`gentoo-b3`](https://github.com/sakaki-/gentoo-b3-overlay): this overlay (provided by Sakaki) provides a modern version of the `lzo` package ([upstream](https://www.oberhumer.com/opensource/lzo/download/); required because of an [alignment bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=757037#32)), and the `buildkernel-b3` tool ([source](https://github.com/sakaki-/buildkernel-b3), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/buildkernel-b3.pdf)).
   * [`bubba`](https://github.com/gordonb3/bubba-overlay): this overlay provides the `Bubba OS` and `Logitech Media Server`. It also provides ebuilds for the home automation software Domoticz and supporting software; these have not been installed in the image, but you can easily `emerge` them if you like.
+* The following unmaintained overlays from Sakaki have been converted to user-defined repositories and stripped down to provide the following named packages:
+  * [`sakaki-tools`](https://github.com/sakaki-/sakaki-tools): this overlay (provided by Sakaki) provides the tools `showem` ([source](https://github.com/sakaki-/showem), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/showem.pdf)) and `genup` ([source](https://github.com/sakaki-/genup), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/genup.pdf)). (Note - these replace the old `showem-lite` and `genup-lite` tools.)
+  * [`gentoo-b3`](https://github.com/sakaki-/gentoo-b3-overlay): this overlay (provided by Sakaki) provides the `buildkernel-b3` tool ([source](https://github.com/sakaki-/buildkernel-b3), [manpage](https://github.com/sakaki-/gentoo-on-b3/raw/master/reference/buildkernel-b3.pdf)).
 * Please note that the firewall, as initially configured, will allow `ssh` traffic on the `wan` port also.
 * Apart from Apache web server to run the Bubba User Interface, Samba file sharing is also enabled by default
-* Tor is not installed on the bubbagen image because of licensing issues with openssl. You may install it yourself but you should note that this will trigger a rebuild of several other packages (including openssl and openssh - careful!)
 * There is no MySQL in the bubbagen image. Reason? It consumes too much memory (YMMV). Original Excito Bubba OS Services that used it have either been adapted to use SQLite instead, or been replaced by alternatives. Webmail is now served by Roundcube and bubba-album was dropped in favor of Singapore Gallery (sgal).
-* If you have a WiFi-enabled B3, the corresponding network interface is named `wlan0` (there is a `udev` rule that does this, namely `/lib/udev/rules.d/70-net-name-use-custom.rules`). Please note that this rule will **not** work correctly if you have more than one WiFi adaptor on your B3 (an unusual setup).
+* If you have a WiFi-enabled B3, the corresponding network interface is named `wlan0` (there is a `udev` rule that does this, namely `/lib/udev/rules.d/70-net-name-use-custom.rules`). Do note that this rule will **not** work correctly if you have more than one WiFi adaptor on your B3 (an unusual setup) or replaced the WiFi adapter with a different brand.
 * The image includes a 1GiB swap partition, and also has sufficient space in its root partition to e.g., perform a kernel compilation, should you so desire.
 * If you have a USB key larger than the minimum 8GB, after writing the image you can easily extend the size of the second partition (using `fdisk` and `resize2fs`), so you have more space to work in. See [these instructions](https://geekpeek.net/resize-filesystem-fdisk-resize2fs/), for example.
 * Postfix has been reconfigured to disallow starttls on the regular port 25. Use submission or ssmtp ports instead if you want to use relay from other than the lan interface.
@@ -238,7 +217,7 @@ Once logged in, feel free to configure your system as you like! Of course, if yo
 
 ### Keeping Your Gentoo System Up-To-Date
 
-Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.16/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 ### Upgrading from a previous version of Bubbagen
@@ -254,9 +233,11 @@ Please refer to the corresponding section(s) in the [older README](https://githu
   * /etc/php/*
   * /etc/postfix/master.cf
   * /etc/profile*
+  * /etc/init.d/*
   * /etc/runlevels/*
   * /etc/ssh/*
   * /etc/ssl/*
+  * /etc/systemd/*
 
 
 ### Redistribution note
@@ -264,7 +245,7 @@ Please refer to the corresponding section(s) in the [older README](https://githu
 As of version 1.13 Bubbagen now ships with the bindist USE flag pre-removed from the global make profile. This will cause a rebuild of several packages that depend on this USE flag when you run updates or install new software that has a dependency on one or more of these packages. Due to patent restrictions you may at that point no longer redistribute Bubbagen. To reinstate the bindist flag you should run the following command:
 
 ```
-# USE="bindist" emerge --oneshot --nodeps app-admin/bubbagen
+# USE="bindist" emerge --oneshot app-admin/bubbagen
 ```
 This does not only set the bindist flag but also includes several package specific masks and USE flags required to handle conflicts with the bindist flag. When you are done installing your additional software and/or updates you can use the same command but now with `USE="-bindist"` to remove the bindist flag and related config files from portage settings.
 
