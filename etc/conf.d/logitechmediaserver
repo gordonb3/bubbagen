@@ -7,5 +7,5 @@
 # options, but note that many of them are supplied by
 # /etc/init.d/logitechmediaserver and so don't need to be present here.
 #LMS_OPTS="--d_startup"
-LMS_OPTS="${LMS_OPTS} --nomysqueezebox --notranscoding"
 
+LMS_OPTS="${LMS_OPTS} --nomysqueezebox --notranscoding"
