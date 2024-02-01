@@ -2,6 +2,7 @@
 # Change LED color to show we are completely started.
 #   - Turn BLUE when running from harddisk
 #   - Turn GREEN when running from USB
+#
 # Copyright (c) 2016 gordonb3 <gordon@bosvangennip.nl>
 # License: GPL 3.0+
 # NO WARRANTY

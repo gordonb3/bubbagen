@@ -1,0 +1,18 @@
+#!/bin/sh
+# Start dnsmasq service when system is running with the fallback DHCP address
+#
+# Copyright (c) 2024 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+[ -e /etc/runlevels/default/dnsmasq ] && exit
+
+eval $(grep ^lanif /etc/bubba/networkmanager.conf)
+
+grep -q "config_${lanif}.*dhcp" /etc/conf.d/net || exit
+
+lanaddr=$(ip -br -4 addr | grep "^${lanif}" | awk '{print $3}' | cut -d/ -f1)
+if [ "${lanaddr}" = "192.168.10.1" ]; then
+    rc-service dnsmasq start
+fi
+

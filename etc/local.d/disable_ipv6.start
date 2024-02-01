@@ -3,6 +3,7 @@
 # Regretfully some components have a dependency on IPv6 and we cannot
 # remove it completely, but we still want to get rid of the auto-assigned
 # IPv6 addresses causing mayhem
+#
 # Copyright (c) 2016 gordonb3 <gordon@bosvangennip.nl>
 # License: GPL 3.0+
 # NO WARRANTY

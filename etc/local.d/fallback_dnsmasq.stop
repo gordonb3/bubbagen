@@ -1,0 +1,13 @@
+#!/bin/sh
+# Gracefully stop dnsmasq if it was manually started
+#
+# Copyright (c) 2024 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+[ -e /etc/runlevels/default/dnsmasq ] && exit
+
+if [ -e /run/dnsmasq.pid ]; then
+    rc-service dnsmasq stop
+fi
+

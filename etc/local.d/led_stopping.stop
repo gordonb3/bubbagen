@@ -1,6 +1,7 @@
 #!/bin/bash
 # Turn on purple LED to show we are between poweroff
 # and active state (used for boot AND shutdown)
+#
 # Copyright (c) 2015 gordonb3 <gordon@bosvangennip.nl>
 # License: GPL 3.0+
 # NO WARRANTY
