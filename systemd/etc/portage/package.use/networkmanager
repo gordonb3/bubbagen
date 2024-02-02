@@ -4,8 +4,7 @@
 # glib-networking pulls in gnome desktop elements
 net-libs/glib-networking  -gnome
 
-# networkmanager favours dhclient, but we want dhcpcd for fallback address support
 # disable wifi extensions - we are using hostapd
 # disable gtk-doc
-net-misc/networkmanager   dhcpcd -dhclient -introspection -wext -wifi -gtk-doc
+net-misc/networkmanager   -introspection -wext -wifi -gtk-doc
 
