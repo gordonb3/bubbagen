@@ -16,3 +16,11 @@ then
 	[ -e ${ED}/etc/init.d ] && rmdir -v ${ED}/etc/init.d
 fi
 
+
+if [ "${CATEGORY}/${PN}" == "sys-apps/sysvinit" ];
+then
+	# systemd >= 2.55 claims these files
+	[ -e ${ED}/sbin/runlevel ] && rm -v ${ED}/sbin/runlevel ${ED}/sbin/telinit
+	[ -e ${ED}/usr/bin/runlevel ] && rm -v ${ED}/usr/bin/runlevel ${ED}/usr/bin/telinit
+fi
+
