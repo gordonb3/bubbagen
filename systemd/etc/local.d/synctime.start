@@ -1,0 +1,29 @@
+#!/bin/sh
+# Verify if time on our B3 is good
+#
+# When the battery for the onboard clock goes dead the B3 will start with time
+# set to 1:00 AM on Jan 1, 2000. This causes the web based GUI to fail leaving
+# only ssh to configure the system.
+#
+# This script verifies whether the system reports a time that is at least in the
+# year 2024. When it detects an older date it will attempt to fetch current time
+# from an internet time server. When no internet connection is present it will
+# set time to 1:00 AM on Jan 1, 2024 to fix the issue with the GUI
+#
+#
+# Copyright (c) 2024 gordonb3 <gordon@bosvangennip.nl>
+# License: GPL 3.0+
+# NO WARRANTY
+
+currentyear=$(date +%Y)
+[ ${currentyear} -gt 2023 ] && exit
+
+connectionstatus = $(wget -q --spider http://www.ntppool.org ; echo $?)
+systemctl stop ntpd
+if [ $connectionstatus = 0 ]; then
+	ntpdate pool.ntp.org
+else
+	date 010101002024
+fi
+systemctl start ntpd
+
