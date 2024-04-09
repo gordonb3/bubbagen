@@ -12,8 +12,7 @@ esac
 if [ "${EBUILD_PHASE_FUNC}" == "pkg_preinst" ];
 then
 	# prevent spamming the log with non matching service names in /etc/init.d
-	[ -e ${ED}/etc/init.d/* ] && rm -v ${ED}/etc/init.d/*
-	[ -e ${ED}/etc/init.d ] && rmdir -v ${ED}/etc/init.d
+	[ -e ${ED}/etc/init.d ] && rm -v ${ED}/etc/init.d/* && rmdir -v ${ED}/etc/init.d
 fi
 
 
