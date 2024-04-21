@@ -1,5 +1,0 @@
-# we require >= 3.15, to get the kirkwood-b3.dts file
-# for the device tree blob
-# per http://forum.excito.net/viewtopic.php?f=9&t=4641&start=15#p24679
-<sys-kernel/gentoo-sources-3.15
-

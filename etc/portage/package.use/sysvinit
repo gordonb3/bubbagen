@@ -1,9 +1,0 @@
-# Obsolete!
-#
-# The required changes have been moved to the local bashrc.
-# Keep this file in place until it is safe to delete
-# sys-apps/sysvinit::bubba from the overlay.
-# 
-# feroceon USE flag integrates the B3 specific shutdown
-# procedure into the sysvinit routines
-sys-apps/sysvinit -feroceon
