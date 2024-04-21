@@ -15,7 +15,7 @@ The image may be downloaded from the link below and should work, without modific
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.17.0 | [bubbagenb3img-1.17.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.17/bubbagenb3img-1.17.0.xz)
+B3 with or without Internal Drive | openRC | 1.18.0 | [bubbagenb3img-1.18.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.18/bubbagenb3img-1.18.0.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -31,7 +31,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.17/bubbagenb3img-1.17.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.18/bubbagenb3img-1.18.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -40,7 +40,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.17.0.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.18.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -92,19 +92,22 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.18/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
 1. The image supplied kernel is version 6.6.13 and supports both openrc and systemd init systems. 
 
-1. The live USB image has been brought up to date against the Gentoo tree as of 18 Feb 2024. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/installed-packages-1.17.0).
+1. The live USB image has been brought up to date against the Gentoo tree as of 21 Apr 2024. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/v1.18/reference/installed-packages-1.18.0).
 
 1. The bubbagen image has sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be pretty CPU intensive and the B3 may run quite hot and even use more power than when running an OS.
 
 Have fun! ^-^
+
+## Changes since version 1.17
+* switched to Gentoo profile 23
 
 ## Changes since version 1.16
 * dropped systemd as a binary release - see [wiki](https://github.com/gordonb3/bubbagen/wiki) if you like to switch to systemd
@@ -219,7 +222,7 @@ Once logged in, feel free to configure your system as you like! Of course, if yo
 
 ### Keeping Your Gentoo System Up-To-Date
 
-Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.17/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+Please refer to the corresponding section(s) in the [older README](https://github.com/gordonb3/bubbagen/blob/v1.18/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 ### Upgrading from a previous version of Bubbagen
