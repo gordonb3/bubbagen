@@ -1,3 +1,0 @@
-# required dbus USE flag on avahi
-net-dns/avahi	dbus
-

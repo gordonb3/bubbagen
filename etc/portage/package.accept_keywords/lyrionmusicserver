@@ -1,5 +1,5 @@
-# Requirements for Logitech Media Server
-media-sound/logitechmediaserver ~arm
+# Requirements for Lyrion Music Server
+media-sound/lyrionmusicserver ~arm
 dev-lang/nasm **
 dev-perl/Algorithm-C3 **
 dev-perl/Audio-Scan **
