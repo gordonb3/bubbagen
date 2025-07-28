@@ -1,0 +1,13 @@
+diff '--color=auto' -u a/owntone.conf.in b/owntone.conf.in
+--- a/owntone.conf.in	2025-07-28 12:55:21.991939015 +0200
++++ b/owntone.conf.in	2025-07-28 14:05:14.511956347 +0200
+@@ -82,7 +82,7 @@
+ #	password = ""
+ 
+ 	# Directories to index
+-	directories = { "/srv/music" }
++	directories = { "/home/storage/music" }
+ 
+ 	# Follow symlinks. Default: true.
+ #	follow_symlinks = true
+

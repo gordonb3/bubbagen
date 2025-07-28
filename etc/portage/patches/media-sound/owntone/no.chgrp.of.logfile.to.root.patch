@@ -1,0 +1,13 @@
+diff '--color=auto' -u a/src/logger.c b/src/logger.c
+--- a/src/logger.c	2025-02-22 09:07:03.000000000 +0100
++++ b/src/logger.c	2025-07-28 14:00:58.821955290 +0200
+@@ -442,7 +442,7 @@
+       return -1;
+     }
+ 
+-  ret = fchown(fileno(logfile), runas_uid, 0);
++  ret = fchown(fileno(logfile), runas_uid, -1);
+   if (ret < 0)
+     fprintf(stderr, "Failed to set ownership on logfile: %s\n", strerror(errno));
+ 
+
