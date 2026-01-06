@@ -1,21 +1,21 @@
 # bubbagen
 
-Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 6.6.13 - Gentoo stable)
+Bootable live-USB of Bubba OS for the Excito B3 miniserver, build on Gentoo (kernel 6.12.38 - Gentoo stable)
 
 ## Description
 
 <img src="https://raw.githubusercontent.com/gordonb3/cache/master/Bubba/Excito-B3.jpg" alt="Excito B3" width="250px" align="right"/>
-This project is a spin-off from [Sakaki's gentoo-on-b3 project](https://github.com/sakaki-/gentoo-on-b3) and contains what was previously published as the `Special Edition` while the Bubba overlay was still in beta.<br><br>
+This project is a spin-off from [Sakaki&quot;s gentoo-on-b3 project](https://github.com/sakaki-/gentoo-on-b3) and contains what was previously published as the `Special Edition` while the Bubba overlay was still in beta.<br><br>
   
 As with the original, this project contains a bootable, live-USB image for the Excito B3 miniserver. You can use it as a rescue disk, to play with Gentoo Linux, or as the starting point to install Gentoo Linux on your B3's main hard drive. You can even use it on a diskless B3. No soldering, compilation, or [U-Boot](https://www.denx.de/project/u-boot/) flashing is required! You can run it without harming your B3's existing software; however, any changes you make while running the system *will* be saved to the USB (i.e., there is persistence).
 
-The kernel used in the image is **6.6.13** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
+The kernel used in the image is **6.12.38** from gentoo-sources, with the necessary code to temporarily switch off the L2 cache in early boot (per [this link](https://lists.debian.org/debian-boot/2012/08/msg00804.html)) prepended, and the kirkwood-b3 device tree blob appended.
 
 The image may be downloaded from the link below and should work, without modification, whether your B3 has an internal hard drive fitted or not.
 
 Variant | Init type | Version | Image
 :--- | ---: | ---: | ---:
-B3 with or without Internal Drive | openRC | 1.18.0 | [bubbagenb3img-1.18.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.18/bubbagenb3img-1.18.0.xz)
+B3 with or without Internal Drive | openRC | 1.19.0 | [bubbagenb3img-1.19.0.xz](https://github.com/gordonb3/bubbagen/releases/download/v1.19/bubbagenb3img-1.19.0.xz)
 
 > Please read the instructions below before proceeding. Also please note that all images are provided 'as is' and without warranty.
 
@@ -31,7 +31,7 @@ To try this out, you will need:
 
 On your Linux box, issue:
 ```
-# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.18/bubbagenb3img-1.18.0.xz
+# wget -c https://github.com/gordonb3/bubbagen/releases/download/v1.19/bubbagenb3img-1.19.0.xz
 ```
 to fetch the compressed disk image file
 
@@ -40,7 +40,7 @@ Next, insert (into your Linux box) the USB key on which you want to install the 
 > **Warning** - this will *destroy* all existing data on the target drive, so please double-check that you have the path correct!
 
 ```
-# xzcat bubbagenb3img-1.18.0.xz > /dev/sdX && sync
+# xzcat bubbagenb3img-1.19.0.xz > /dev/sdX && sync
 ```
 
 Substitute the actual USB key device path, for example `/dev/sdc`, for `/dev/sdX` in the above command. Make sure to reference the device, **not** a partition within it (so e.g., `/dev/sdc` and not `/dev/sdc1`; `/dev/sdd` and not `/dev/sdd1` etc.)
@@ -59,7 +59,7 @@ Begin with your B3 powered off and the power cable removed. Insert the USB key i
 
 > The `purple` state will use 15 seconds less if you attach the WAN port to a valid existing network
 
-> The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive (stock Sakaki gentoo-on-b3 will also show green LED when running from harddrive)
+> The image uses a solid green LED as its 'normal' state to show that your B3 is running from USB key. This should make it easy to identify whether your system booted from USB or hard drive
 
 After the LED turns green in step 3, above, you should be able to log in, via `ssh`, per the following instructions.
 
@@ -77,9 +77,9 @@ Alternatively you may log into the B3 using an ssh client:
 $ ssh root@b3
 The authenticity of host 'b3 (192.168.10.1)' can't be established.
 ED25519 key fingerprint is 0c:b5:1c:66:19:8a:dc:81:0e:dc:1c:f5:25:57:7e:66.
-Are you sure you want to continue connecting (yes/no)? <type yes and press Enter>
+Are you sure you want to continue connecting (yes/no)? <type `yes` and press Enter>
 Warning: Permanently added 'b3,192.168.10.1' (ED25519) to the list of known hosts.
-Password: <type gentoob3 and press Enter>
+Password: <type `gentoob3` and press Enter>
 b3 ~ # 
 ```
 and you're in! You may receive a different fingerprint type, depending on what your `ssh` client supports. Also, please note that the `ssh` host keys are generated on first boot (for security), and so the fingerprint you get will be different from that shown above.
@@ -92,19 +92,29 @@ If you have previously connected to a *different* machine with the *same* IP add
 
 ## Using Gentoo
 
-For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.18/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
+For the main text on this, please refer to the [older README](https://github.com/gordonb3/bubbagen/blob/v1.19/reference/gentoo-on-b3-1.8.0-README.md) by Sakaki.
 
 
 The following major changes to the original 1.8.0 release from Sakaki apply:
 
-1. The image supplied kernel is version 6.6.13 and supports both openrc and systemd init systems. 
+1. The image supplied kernel is version 6.12.38 and supports both openrc and systemd init systems. 
 
-1. The live USB image has been brought up to date against the Gentoo tree as of 21 Apr 2024. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/v1.18/reference/installed-packages-1.18.0).
+1. The live USB image has been brought up to date against the Gentoo tree as of 6 Jan 2026. The full set of packages in the image may be viewed [here](https://github.com/gordonb3/bubbagen/blob/v1.19/reference/installed-packages-1.19).
 
 1. The bubbagen image has sysvinit patched to follow the hardware specific routine for shutting down. As such you can now simply use `halt` or `poweroff` commands (Sakaki's `poweroff-b3` script is not available in this image) to shut down the B3.
 > Please note that the B3 does not actually power down but enters a special pre boot environment where it waits for the button on the rear to be pressed. As multiple users discovered, this happens to be pretty CPU intensive and the B3 may run quite hot and even use more power than when running an OS.
 
 Have fun! ^-^
+
+## Changes since version 1.18
+* rebranded packages:
+  * catched up with forked-daapd having been rebranded OwnTone a long time ago
+  * Logitech Media Server has become Lyrion Music Server
+* fixed incorrect user ID in net-p2p/filetransferdaemon, due to which the upload file procedure was disfunctional
+* developer language updates: gcc 15.2, perl 5.42, python 3.13, php 8.3
+* java developer kit removed, its only purpose was to be able to build forked-daapd
+* moved app-portage/genup to the bubba repository as it required updating due to Gentoo's perl packages maintainer causing it to horribly fail. The revised version prioritizes installing app-admin/bubbagen, allowing vital changes to be made to portage environment prior to running possible system breaking world updates
+* reorganized the package sets to create a smaller install base for people that only want basic functionality - i.e. Windows file sharing and the web based administration tool.
 
 ## Changes since version 1.17
 * switched to Gentoo profile 23
@@ -115,23 +125,16 @@ Have fun! ^-^
 * fixed DHCP server not coming up when the B3 falls back to its predifined address 192.168.10.1
 * added a time correcting service for machines with a dead RTC battery which caused the GUI to be unreachable
 * fixed various PHP deprecation notices in the GUI
-* added Web Service Discovery daemon that allows your B3 to be listed in Windows Network
+* added Web Service Discovery daemon that allows your B3 to be exposed in Windows Network
 * Logitech Media Server will now start with mysqueezebox.com integration disabled - service will end first quarter of 2024
 * removed the gentoo-b3 repository
-  * the only remaining package was sys-kernel/buildkernel-b3 which failed with kernel 6.6
+  * the only remaining package was sys-kernel/buildkernel-b3 which failed as of kernel version 6.6
   * revised package sys-kernel/buildkernel-b3 is now part of the bubba repository
-
-## Changes since version 1.15
-* kernel: smaller core due to full revision of config, removing obsolete
-* developer language updates: gcc 13.2, perl 5.38
-* fixed an issue with bubba-admin ebuild going into deadlock during post-install
-* updated Logitech Media Server to the latest stable version 8.3.1
-* re-added Tor anonymous communication router to @bubba set
-* removed Easyfind client - service was terminated in June 2023
 
 ## Older changes
 
 * kernel:
+ * full revision of config and removing obsolete elements creating smaller core
  * added support for latest gen Intel wifi adapters
  * added wireguard VPN support
  * bubbagen kernel is now a binary package
@@ -149,11 +152,15 @@ Have fun! ^-^
 * features:
  * disabled torrent support in net-p2p/filetransferdaemon
  * now using nftables as the firewall back-end
+ * re-added Tor anonymous communication router to @bubba set
+ * removed Easyfind client - service was terminated in June 2023
 * GUI updates:
  * removed build dependency on resources unfriendly ruby, nodejs and spidermonkey
  * empty postdata on lanupdate would cause the NIC to be set to dynamic IP
  * fix display of AllowRemote value for admin user
  * block enabling the WiFi AP when LAN is set to receive its IP through DHCP (causes network to fail)
+* bug fixes:
+ * fixed an issue with bubba-admin ebuild going into deadlock during post-install
 
 ## Miscellaneous Points
 

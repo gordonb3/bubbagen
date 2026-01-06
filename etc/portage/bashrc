@@ -13,8 +13,3 @@ case ${CATEGORY}/${PN} in
 		fi
 	;;
 esac
-
-
-
-
-
