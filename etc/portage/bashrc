@@ -6,5 +6,15 @@ case ${CATEGORY}/${PN} in
 			/usr/share/distcc/distcc-fix &
 		fi
 	;;
+	mail-client/roundcube)
+		if [ "${EBUILD_PHASE}" == "postinst" ];
+		then
+			/usr/share/roundcube/bubba-config &
+		fi
+	;;
 esac
+
+
+
+
 

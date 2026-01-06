@@ -1,0 +1,38 @@
+#!/bin/sh
+DATAPATH=/var/lib/roundcube
+
+mkdir -p ${DATAPATH}
+chmod 0751 ${DATAPATH}
+
+if [ ! -f ${DATAPATH}/config.inc.php ]; then
+    cat > ${DATAPATH}/config.inc.php << EOF
+<?php
+
+\$config['db_dsnw'] = 'sqlite:///${DATAPATH}/roundcubemail.db?mode=0646';
+\$config['imap_host'] = 'localhost:143';
+\$config['smtp_host'] = 'localhost:25';
+\$config['support_url'] = '';
+\$config['temp_dir'] = '/tmp';
+\$config['des_key'] = '@DESKEY@';
+\$config['plugins'] = [];
+EOF
+
+    DESKEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 24 | head -n 1)
+    sed -e "s/@DESKEY@/${DESKEY}/" -i ${DATAPATH}/config.inc.php
+    rm -f ${DATAPATH}/roundcubemail.db
+fi
+
+if (equery -q l nginx >/dev/null); then
+    chown -R nginx:nginx ${DATAPATH}
+else
+    chown -R apache:apache ${DATAPATH}
+fi
+
+# need to include twice to compensate for possible incorrect order of variable declarations
+. /etc/vhosts/webapp-config
+. /etc/vhosts/webapp-config
+
+# link to our config file
+ln -snf ${DATAPATH}/config.inc.php ${vhost_root}/${vhost_htdocs_insecure}/roundcube/config/
+# remove the roundcube installer files
+rm -rf ${vhost_root}/${vhost_htdocs_insecure}/roundcube/installer

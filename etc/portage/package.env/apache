@@ -1,0 +1,3 @@
+dev-libs/apr		link-atomic.conf
+www-servers/apache	link-atomic.conf
+
